@@ -1,21 +1,18 @@
 {
-  "name": "mern-marketplace",
+  "name": "Supermerk2",
   "version": "1.0.0",
-  "description": "A MERN stack based online marketplace application",
-  "author": "Shama Hoque",
-  "license": "MIT",
+  "description": "A supermarket place app",
   "keywords": [
     "react",
     "express",
     "mongodb",
-    "node",
-    "mern"
+    "node"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/shamahoque/mern-marketplace.git"
+    "url": "https://github.com/ezequielporras/supermerk2"
   },
-  "homepage": "https://github.com/shamahoque/mern-marketplace",
+  "homepage": "https://github.com/ezequielporras/supermerk2",
   "main": "./dist/server.generated.js",
   "scripts": {
     "development": "nodemon",
