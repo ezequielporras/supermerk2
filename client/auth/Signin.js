@@ -32,7 +32,9 @@ const styles = theme => ({
   },
   submit: {
     margin: 'auto',
-    marginBottom: theme.spacing.unit * 2
+    marginBottom: theme.spacing.unit * 2,
+    backgroundColor: '#7D2DEE',
+    color: '#fff'
   }
 })
 
@@ -83,7 +85,7 @@ class Signin extends Component {
           <Typography type="headline" component="h2" className={classes.title}>
             Ingresar
           </Typography>
-          <TextField id="email" type="email" label="Email" className={classes.textField} value={this.state.email} onChange={this.handleChange('email')} margin="normal"/><br/>
+          <TextField id="email" type="email" label="Email" className={classes.textField} value={this.state.email} onChange={this.handleChange('email')} margin="normal" /><br/>
           <TextField id="password" type="password" label="Contraseña" className={classes.textField} value={this.state.password} onChange={this.handleChange('password')} margin="normal"/>
           <br/> {
             this.state.error && (<Typography component="p" color="error">
@@ -93,7 +95,7 @@ class Signin extends Component {
           }
         </CardContent>
         <CardActions>
-          <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Ingresar</Button>
+          <Button onClick={this.clickSubmit} className={classes.submit}>Ingresar</Button>
         </CardActions>
       </Card>
     )

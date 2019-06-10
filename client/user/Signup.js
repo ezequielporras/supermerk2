@@ -32,7 +32,9 @@ const styles = theme => ({
   },
   submit: {
     margin: 'auto',
-    marginBottom: theme.spacing.unit * 2
+    marginBottom: theme.spacing.unit * 2,
+    backgroundColor: '#7D2DEE',
+    color: '#fff'
   }
 })
 
@@ -82,7 +84,7 @@ class Signup extends Component {
           }
         </CardContent>
         <CardActions>
-          <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Confirmar</Button>
+          <Button onClick={this.clickSubmit} className={classes.submit}>Confirmar</Button>
         </CardActions>
       </Card>
       <Dialog open={this.state.open} disableBackdropClick={true}>
