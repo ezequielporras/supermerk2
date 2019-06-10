@@ -99,7 +99,7 @@ render() {
               {this.state.error}
           </Typography>)
         }
-        <Button color="secondary" variant="raised" onClick={this.placeOrder}>Place Order</Button>
+        <Button color="secondary" variant="raised" onClick={this.placeOrder}>Comprar</Button>
       </div>
     </span>)
   }

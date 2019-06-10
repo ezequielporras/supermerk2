@@ -7,7 +7,6 @@ import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
 import {read, listRelated} from './api-product.js'
 import {Link} from 'react-router-dom'
-import Suggestions from './../product/Suggestions'
 import AddToCart from './../cart/AddToCart'
 
 const styles = theme => ({
@@ -64,8 +63,6 @@ class Product extends Component {
     super()
     this.state = {
       product: {shop: {}},
-      suggestions: [],
-      suggestionTitle: 'Related Products'
     }
     this.match = match
   }
@@ -75,14 +72,6 @@ class Product extends Component {
         this.setState({error: data.error})
       } else {
         this.setState({product: data})
-        listRelated({
-          productId: data._id}).then((data) => {
-          if (data.error) {
-            console.log(data.error)
-          } else {
-            this.setState({suggestions: data})
-          }
-        })
      }
     })
   }
@@ -105,7 +94,7 @@ class Product extends Component {
               <Card className={classes.card}>
                 <CardHeader
                   title={this.state.product.name}
-                  subheader={this.state.product.quantity > 0? 'In Stock': 'Out of Stock'}
+                  subheader={this.state.product.quantity > 0? 'Con Stock': 'Sin Stock'}
                   action={
                     <span className={classes.action}>
                       <AddToCart cartStyle={classes.addCart} item={this.state.product}/>
@@ -131,10 +120,6 @@ class Product extends Component {
                 </div>
               </Card>
             </Grid>
-            {this.state.suggestions.length > 0 &&
-              (<Grid item xs={5} sm={5}>
-                <Suggestions  products={this.state.suggestions} title='Related Products'/>
-              </Grid>)}
           </Grid>
         </div>)
   }

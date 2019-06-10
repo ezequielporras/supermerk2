@@ -70,7 +70,7 @@ class Signup extends Component {
       <Card className={classes.card}>
         <CardContent>
           <Typography type="headline" component="h2" className={classes.title}>
-            Sign Up
+            Registración
           </Typography>
           <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
           <TextField id="email" type="email" label="Email" className={classes.textField} value={this.state.email} onChange={this.handleChange('email')} margin="normal"/><br/>
@@ -82,20 +82,20 @@ class Signup extends Component {
           }
         </CardContent>
         <CardActions>
-          <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
+          <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Confirmar</Button>
         </CardActions>
       </Card>
       <Dialog open={this.state.open} disableBackdropClick={true}>
-        <DialogTitle>New Account</DialogTitle>
+        <DialogTitle>Nueva cuenta</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            New account successfully created.
+            Nueva cuenta creada.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Link to="/signin">
             <Button color="primary" autoFocus="autoFocus" variant="raised">
-              Sign In
+              Ingresar
             </Button>
           </Link>
         </DialogActions>

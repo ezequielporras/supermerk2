@@ -124,10 +124,10 @@ class EditProduct extends Component {
               <FileUpload/>
             </Button>
           </label> <span className={classes.filename}>{this.state.image ? this.state.image.name : ''}</span><br/>
-          <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
+          <TextField id="name" label="Nombre" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
           <TextField
             id="multiline-flexible"
-            label="Description"
+            label="Descripción"
             multiline
             rows="3"
             value={this.state.description}
@@ -135,9 +135,9 @@ class EditProduct extends Component {
             className={classes.textField}
             margin="normal"
           /><br/>
-          <TextField id="category" label="Category" className={classes.textField} value={this.state.category} onChange={this.handleChange('category')} margin="normal"/><br/>
-          <TextField id="quantity" label="Quantity" className={classes.textField} value={this.state.quantity} onChange={this.handleChange('quantity')} type="number" margin="normal"/><br/>
-          <TextField id="price" label="Price" className={classes.textField} value={this.state.price} onChange={this.handleChange('price')} type="number" margin="normal"/><br/>
+          <TextField id="category" label="Categoria" className={classes.textField} value={this.state.category} onChange={this.handleChange('category')} margin="normal"/><br/>
+          <TextField id="quantity" label="Cantidad" className={classes.textField} value={this.state.quantity} onChange={this.handleChange('quantity')} type="number" margin="normal"/><br/>
+          <TextField id="price" label="Precio" className={classes.textField} value={this.state.price} onChange={this.handleChange('price')} type="number" margin="normal"/><br/>
           {
             this.state.error && (<Typography component="p" color="error">
               <Icon color="error" className={classes.error}>error</Icon>
@@ -145,8 +145,8 @@ class EditProduct extends Component {
           }
         </CardContent>
         <CardActions>
-          <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Update</Button>
-          <Link to={'/seller/shops/edit/'+this.match.params.shopId} className={classes.submit}><Button variant="raised">Cancel</Button></Link>
+          <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Confirmar</Button>
+          <Link to={'/seller/shops/edit/'+this.match.params.shopId} className={classes.submit}><Button variant="raised">Cancelar</Button></Link>
         </CardActions>
       </Card>
     </div>)

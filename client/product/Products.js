@@ -67,7 +67,7 @@ class Products extends Component {
               />
             </GridListTile>
           ))}
-        </GridList></div>) : this.props.searched && (<Typography type="subheading" component="h4" className={classes.title}>No products found! :(</Typography>)}
+        </GridList></div>) : this.props.searched && (<Typography type="subheading" component="h4" className={classes.title}>No encontramos productos! :(</Typography>)}
       </div>)
   }
 }

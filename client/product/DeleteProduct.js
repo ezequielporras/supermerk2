@@ -34,11 +34,11 @@ class DeleteProduct extends Component {
   }
   render() {
     return (<span>
-      <IconButton aria-label="Delete" onClick={this.clickButton} color="secondary">
+      <IconButton aria-label="El" onClick={this.clickButton} color="secondary">
         <DeleteIcon/>
       </IconButton>
       <Dialog open={this.state.open} onClose={this.handleRequestClose}>
-        <DialogTitle>{"Delete "+this.props.product.name}</DialogTitle>
+        <DialogTitle>{"Eliminar "+this.props.product.name}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Confirm to delete your product {this.props.product.name}.

@@ -71,14 +71,14 @@ class MyShops extends Component {
     <div>
       <Paper className={classes.root} elevation={4}>
         <Typography type="title" className={classes.title}>
-          Your Shops
-          <span className={classes.addButton}>
+          Tu tienda
+            {this.state.shops === 0 && <span className={classes.addButton}>
             <Link to="/seller/shop/new">
               <Button color="primary" variant="raised">
-                <Icon className={classes.leftIcon}>add_box</Icon>  New Shop
+                <Icon className={classes.leftIcon}>add_box</Icon>  Nueva tienda
               </Button>
             </Link>
-          </span>
+          </span>}
         </Typography>
         <List dense>
         {this.state.shops.map((shop, i) => {
@@ -92,7 +92,7 @@ class MyShops extends Component {
                   (<ListItemSecondaryAction>
                     <Link to={"/seller/orders/" + shop.name+ '/'+shop._id}>
                       <Button aria-label="Orders" color="primary">
-                        View Orders
+                        Ver ordenes
                       </Button>
                     </Link>
                     <Link to={"/seller/shop/edit/" + shop._id}>

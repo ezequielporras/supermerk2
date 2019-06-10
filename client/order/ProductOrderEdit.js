@@ -49,7 +49,7 @@ class ProductOrderEdit extends Component {
   loadStatusValues = () => {
     getStatusValues().then((data) => {
       if (data.error) {
-        this.setState({error: "Could not get status"})
+        this.setState({error: "No se pudo obtener el estado"})
       } else {
         this.setState({statusValues: data, error: ''})
       }
@@ -78,7 +78,7 @@ class ProductOrderEdit extends Component {
           })
           .then((data) => {
               if (data.error) {
-                this.setState({error: "Status not updated, try again"})
+                this.setState({error: "El estado no se actualizo, intenta de nuevo"})
               } else {
                 this.props.updateOrders(this.props.orderIndex, order)
                 this.setState({error: ''})
@@ -97,7 +97,7 @@ class ProductOrderEdit extends Component {
           })
           .then((data) => {
               if (data.error) {
-                this.setState({error: "Status not updated, try again"})
+                this.setState({error: "El estado no se actualizo, intenta de nuevo"})
               } else {
                 this.props.updateOrders(this.props.orderIndex, order)
                 this.setState({error: ''})
@@ -114,7 +114,7 @@ class ProductOrderEdit extends Component {
         })
         .then((data) => {
           if (data.error) {
-            this.setState({error: "Status not updated, try again"})
+            this.setState({error: "El estado no se actualizo, intenta de nuevo"})
           } else {
             this.props.updateOrders(this.props.orderIndex, order)
             this.setState({error: ''})
@@ -139,13 +139,13 @@ class ProductOrderEdit extends Component {
                                     <img className={classes.listImg} src={'/api/product/image/'+item.product._id}/>
                                     <div className={classes.listDetails}>
                                       {item.product.name}
-                                      <p className={classes.listQty}>{"Quantity: "+item.quantity}</p>
+                                      <p className={classes.listQty}>{"Cantidad: "+item.quantity}</p>
                                     </div>
                                   </div>}/>
                       <TextField
                         id="select-status"
                         select
-                        label="Update Status"
+                        label="Actualizar estado"
                         className={classes.textField}
                         value={item.status}
                         onChange={this.handleStatusChange(index)}

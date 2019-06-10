@@ -43,18 +43,18 @@ class DeleteUser extends Component {
       </IconButton>
 
       <Dialog open={this.state.open} onClose={this.handleRequestClose}>
-        <DialogTitle>{"Delete Account"}</DialogTitle>
+        <DialogTitle>{"Eliminar cuenta"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Confirm to delete your account.
+            Confirma para eliminar tu cuenta.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleRequestClose} color="primary">
-            Cancel
+            Cancelar
           </Button>
           <Button onClick={this.deleteAccount} color="secondary" autoFocus="autoFocus">
-            Confirm
+            Confirmar
           </Button>
         </DialogActions>
       </Dialog>

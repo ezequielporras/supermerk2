@@ -48,14 +48,14 @@ class MyOrders extends Component {
     return (
       <Paper className={classes.root} elevation={4}>
         <Typography type="title" className={classes.title}>
-          Your Orders
+          Ordenes
         </Typography>
         <List dense>
           {this.state.orders.map((order, i) => {
             return <span key={i}>
                       <Link to={"/order/"+order._id}>
                         <ListItem button>
-                          <ListItemText primary={<strong>{"Order # "+order._id}</strong>} secondary={(new Date(order.created)).toDateString()}/>
+                          <ListItemText primary={<strong>{"Orden # "+order._id}</strong>} secondary={(new Date(order.created)).toDateString()}/>
                         </ListItem>
                       </Link>
                       <Divider/>

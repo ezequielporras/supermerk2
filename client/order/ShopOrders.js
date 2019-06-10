@@ -83,7 +83,7 @@ class ShopOrders extends Component {
           {this.state.orders.map((order, index) => {
             return   <span key={index}>
               <ListItem button onClick={this.handleClick(index)}>
-                <ListItemText primary={'Order # '+order._id} secondary={(new Date(order.created)).toDateString()}/>
+                <ListItemText primary={'Orden # '+order._id} secondary={(new Date(order.created)).toDateString()}/>
                 {this.state.open == index ? <ExpandLess /> : <ExpandMore />}
               </ListItem><Divider/>
               <Collapse component="li" in={this.state.open == index} timeout="auto" unmountOnExit>

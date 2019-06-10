@@ -98,7 +98,7 @@ class Shop extends Component {
         </Grid>
         <Grid item xs={8} sm={8}>
           <Card>
-            <Typography type="title" component="h2" className={classes.productTitle}>Products</Typography>
+            <Typography type="title" component="h2" className={classes.productTitle}>Productos</Typography>
             <Products products={this.state.products} searched={false}/>
           </Card>
         </Grid>

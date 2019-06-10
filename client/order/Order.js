@@ -128,10 +128,10 @@ class Order extends Component {
     return (
       <Card className={classes.card}>
         <Typography type="headline" component="h2" className={classes.title}>
-            Order Details
+            Detalle
         </Typography>
         <Typography type="subheading" component="h2" className={classes.subheading}>
-            Order Code: <strong>{this.state.order._id}</strong> <br/> Placed on {(new Date(this.state.order.created)).toDateString()}
+            # Orden: <strong>{this.state.order._id}</strong> <br/> Pedido el {(new Date(this.state.order.created)).toDateString()}
         </Typography><br/>
         <Grid container spacing={8}>
             <Grid item xs={7} sm={7}>
@@ -150,7 +150,7 @@ class Order extends Component {
                             <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">$ {item.product.price} x {item.quantity}</Typography>
                             <span className={classes.itemTotal}>${item.product.price * item.quantity}</span>
                             <span className={classes.itemShop}>Shop: {item.shop.name}</span>
-                            <Typography type="subheading" component="h3" color={item.status == "Cancelled" ? "error":"secondary"}>Status: {item.status}</Typography>
+                            <Typography type="subheading" component="h3" color={item.status == "Cancelled" ? "error":"secondary"}>Estado: {item.status}</Typography>
                           </CardContent>
                         </div>
                       </Card>
@@ -165,7 +165,7 @@ class Order extends Component {
             <Grid item xs={5} sm={5}>
               <Card className={classes.innerCard}>
                 <Typography type="subheading" component="h2" className={classes.productTitle} color="primary">
-                 Deliver to:
+                 Enviado a:
                 </Typography>
                 <Typography type="subheading" component="h3" className={classes.info} color="primary"><strong>{this.state.order.customer_name}</strong></Typography><br/>
                 <Typography type="subheading" component="h3" className={classes.info} color="primary">{this.state.order.customer_email}</Typography><br/>
@@ -175,7 +175,7 @@ class Order extends Component {
                 <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">{this.state.order.delivery_address.street}</Typography>
                 <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">{this.state.order.delivery_address.city}, {this.state.order.delivery_address.state} {this.state.order.delivery_address.zipcode}</Typography>
                 <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">{this.state.order.delivery_address.country}</Typography><br/>
-                <Typography type="subheading" component="h3" className={classes.thanks} color="primary">Thank you for shopping with us! <br/>You can track the status of your purchased items on this page.</Typography>
+                <Typography type="subheading" component="h3" className={classes.thanks} color="primary">¡Todo listo! <br/>Podes seguir el estado de tu envió aqui.</Typography>
               </Card>
             </Grid>
         </Grid>

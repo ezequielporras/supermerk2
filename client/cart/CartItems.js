@@ -131,7 +131,7 @@ class CartItems extends Component {
     const {classes} = this.props
     return (<Card className={classes.card}>
       <Typography type="title" className={classes.title}>
-        Shopping Cart
+        Carrito de compras
       </Typography>
       {this.state.cartItems.length>0 ? (<span>
           {this.state.cartItems.map((item, i) => {
@@ -147,11 +147,11 @@ class CartItems extends Component {
                   <div>
                     <Typography type="subheading" component="h3" className={classes.price} color="primary">$ {item.product.price}</Typography>
                     <span className={classes.itemTotal}>${item.product.price * item.quantity}</span>
-                    <span className={classes.itemShop}>Shop: {item.product.shop.name}</span>
+                    <span className={classes.itemShop}>Tienda: {item.product.shop.name}</span>
                   </div>
                 </CardContent>
                 <div className={classes.subheading}>
-                  Quantity: <TextField
+                  Cantidad: <TextField
                               value={item.quantity}
                               onChange={this.handleChange(i)}
                               type="number"
@@ -163,7 +163,7 @@ class CartItems extends Component {
                                 shrink: true,
                               }}
                               margin="normal"/>
-                            <Button className={classes.removeButton} color="primary" onClick={this.removeItem(i)}>x Remove</Button>
+                            <Button className={classes.removeButton} color="primary" onClick={this.removeItem(i)}>x Eliminar</Button>
                 </div>
               </div>
             </Card>
@@ -176,14 +176,14 @@ class CartItems extends Component {
             <Button color="secondary" variant="raised" onClick={this.openCheckout}>Checkout</Button>
             :
             <Link to="/signin">
-              <Button color="primary" variant="raised">Sign in to checkout</Button>
+              <Button color="primary" variant="raised">Ingresa para hacer el checkout</Button>
             </Link>)}
           <Link to='/' className={classes.continueBtn}>
-            <Button variant="raised">Continue Shopping</Button>
+            <Button variant="raised">Continuar comprando</Button>
           </Link>
         </div>
       </span>) :
-      <Typography type="subheading" component="h3" color="primary">No items added to your cart.</Typography>
+      <Typography type="subheading" component="h3" color="primary">El carrito esta vacio :(.</Typography>
     }
     </Card>)
   }

@@ -119,21 +119,21 @@ class EditShop extends Component {
           <Card className={classes.card}>
             <CardContent>
               <Typography type="headline" component="h2" className={classes.title}>
-                Edit Shop
+                Editar tienda
               </Typography>
               <br/>
               <Avatar src={logoUrl} className={classes.bigAvatar}/><br/>
               <input accept="image/*" onChange={this.handleChange('image')} className={classes.input} id="icon-button-file" type="file" />
               <label htmlFor="icon-button-file">
                 <Button variant="raised" color="default" component="span">
-                  Change Logo
+                  Cambiar logo
                   <FileUpload/>
                 </Button>
               </label> <span className={classes.filename}>{this.state.image ? this.state.image.name : ''}</span><br/>
-              <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
+              <TextField id="name" label="Nombre" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
               <TextField
                 id="multiline-flexible"
-                label="Description"
+                label="Descripción"
                 multiline
                 rows="3"
                 value={this.state.description}
@@ -142,7 +142,7 @@ class EditShop extends Component {
                 margin="normal"
               /><br/>
               <Typography type="subheading" component="h4" className={classes.subheading}>
-                Owner: {this.state.owner}
+                Responsable: {this.state.owner}
               </Typography><br/>
               {
                 this.state.error && (<Typography component="p" color="error">
@@ -152,7 +152,7 @@ class EditShop extends Component {
               }
             </CardContent>
             <CardActions>
-              <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Update</Button>
+              <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Actualizar</Button>
             </CardActions>
           </Card>
           </Grid>

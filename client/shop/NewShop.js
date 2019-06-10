@@ -85,20 +85,20 @@ class NewShop extends Component {
       <Card className={classes.card}>
         <CardContent>
           <Typography type="headline" component="h2" className={classes.title}>
-            New Shop
+            Nueva tienda
           </Typography>
           <br/>
           <input accept="image/*" onChange={this.handleChange('image')} className={classes.input} id="icon-button-file" type="file" />
           <label htmlFor="icon-button-file">
             <Button variant="raised" color="secondary" component="span">
-              Upload Logo
+              Subir logo
               <FileUpload/>
             </Button>
           </label> <span className={classes.filename}>{this.state.image ? this.state.image.name : ''}</span><br/>
-          <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
+          <TextField id="name" label="Nombre" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
           <TextField
             id="multiline-flexible"
-            label="Description"
+            label="Descripción"
             multiline
             rows="2"
             value={this.state.description}
@@ -112,8 +112,8 @@ class NewShop extends Component {
           }
         </CardContent>
         <CardActions>
-          <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
-          <Link to='/seller/shops' className={classes.submit}><Button variant="raised">Cancel</Button></Link>
+          <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Confirmar</Button>
+          <Link to='/seller/shops' className={classes.submit}><Button variant="raised">Cancelar</Button></Link>
         </CardActions>
       </Card>
     </div>)

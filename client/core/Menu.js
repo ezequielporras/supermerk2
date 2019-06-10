@@ -4,6 +4,8 @@ import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import IconButton from 'material-ui/IconButton'
 import HomeIcon from 'material-ui-icons/Home'
+import ExitToAppIcon from 'material-ui-icons/ExitToApp'
+import AccountCircleIcon from 'material-ui-icons/AccountCircle'
 import Button from 'material-ui/Button'
 import auth from './../auth/auth-helper'
 import {Link, withRouter} from 'react-router-dom'
@@ -23,52 +25,52 @@ const isPartActive = (history, path) => {
   else
     return {color: '#ffffff'}
 }
+
 const Menu = withRouter(({history}) => (
   <AppBar position="static">
     <Toolbar>
-      <Typography type="title" color="inherit">
-        MERN Marketplace
-      </Typography>
+        <Typography type="title" color="inherit">
+            SUPERMERK2
+        </Typography>
       <div>
-        <Link to="/">
-          <IconButton aria-label="Home" style={isActive(history, "/")}>
-            <HomeIcon/>
-          </IconButton>
-        </Link>
-        <Link to="/shops/all">
-          <Button style={isActive(history, "/shops/all")}>All Shops</Button>
-        </Link>
+          <Link to="/">
+              <IconButton aria-label="Home" style={isActive(history, "/")}>
+                  <HomeIcon/>
+              </IconButton>
+          </Link>
+        {/*<Link to="/shops/all">*/}
+          {/*<Button style={isActive(history, "/shops/all")}>All Shops</Button>*/}
+        {/*</Link>*/}
         <Link to="/cart">
           <Button style={isActive(history, "/cart")}>
-            Cart
-            <Badge color="secondary" badgeContent={cart.itemTotal()} style={{'marginLeft': '7px'}}>
+            <Badge color="secondary" badgeContent={cart.itemTotal()}>
               <CartIcon />
             </Badge>
           </Button>
-        </Link>      
+        </Link>
       </div>
       <div style={{'position':'absolute', 'right': '10px'}}><span style={{'float': 'right'}}>
       {
         !auth.isAuthenticated() && (<span>
           <Link to="/signup">
-            <Button style={isActive(history, "/signup")}>Sign up
+            <Button style={isActive(history, "/signup")}>Registrarse
             </Button>
           </Link>
           <Link to="/signin">
-            <Button style={isActive(history, "/signin")}>Sign In
+            <Button style={isActive(history, "/signin")}>Ingresar
             </Button>
           </Link>
         </span>)
       }
       {
         auth.isAuthenticated() && (<span>
-          {auth.isAuthenticated().user.seller && (<Link to="/seller/shops"><Button style={isPartActive(history, "/seller/")}>My Shops</Button></Link>)}
+          {auth.isAuthenticated().user.seller && (<Link to="/seller/shops"><Button style={isPartActive(history, "/seller/")}>Tienda</Button></Link>)}
           <Link to={"/user/" + auth.isAuthenticated().user._id}>
-            <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>My Profile</Button>
+            <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}><AccountCircleIcon/></Button>
           </Link>
           <Button color="inherit" onClick={() => {
               auth.signout(() => history.push('/'))
-            }}>Sign out</Button>
+            }}><ExitToAppIcon/> </Button>
         </span>)
       }
       </span></div>

@@ -75,11 +75,11 @@ class MyProducts extends Component {
     return (
       <Card className={classes.products}>
         <Typography type="title" className={classes.title}>
-          Products
+          Productos
           <span className={classes.addButton}>
             <Link to={"/seller/"+this.props.shopId+"/products/new"}>
               <Button color="primary" variant="raised">
-                <Icon className={classes.leftIcon}>add_box</Icon>  New Product
+                <Icon className={classes.leftIcon}>add_box</Icon>  Nuevo producto
               </Button>
             </Link>
           </span>
@@ -98,7 +98,7 @@ class MyProducts extends Component {
                     {product.name}
                   </Typography>
                   <Typography type="subheading" component="h4" className={classes.subheading}>
-                    Quantity: {product.quantity} | Price: ${product.price}
+                    Cantidad: {product.quantity} | Precio: ${product.price}
                   </Typography>
                 </div>
                 <ListItemSecondaryAction>
