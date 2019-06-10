@@ -14,7 +14,6 @@ const styles = theme => ({
   card: {
     margin: 'auto',
     textAlign: 'center',
-    paddingTop: 10,
     backgroundColor: '#80808024'
   },
   menu: {
@@ -23,20 +22,23 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 130,
+    width: 230,
     verticalAlign: 'bottom',
-    marginBottom: '20px'
+    marginBottom: '15px'
   },
   searchField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 300,
-    marginBottom: '20px'
+    marginBottom: '15px'
   },
   searchButton: {
     minWidth: '20px',
     height: '30px',
-    padding: '0 8px'
+    padding: '0 6px',
+    backgroundColor: '#7D2DEE',
+    borderRadius: '50px',
+    color: '#fff'
   }
 })
 
@@ -118,7 +120,7 @@ class Search extends Component {
             className={classes.searchField}
             margin="normal"
           />
-          <Button variant="raised" color={'primary'} className={classes.searchButton} onClick={this.search}>
+          <Button className={classes.searchButton} onClick={this.search}>
             <SearchIcon/>
           </Button>
           <Divider/>

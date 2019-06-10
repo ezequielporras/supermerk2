@@ -15,19 +15,23 @@ import cart from './../cart/cart-helper'
 
 const isActive = (history, path) => {
   if (history.location.pathname == path)
-    return {color: '#bef67a'}
+    return {color: '#1ADEE5'}
   else
     return {color: '#ffffff'}
 }
 const isPartActive = (history, path) => {
   if (history.location.pathname.includes(path))
-    return {color: '#bef67a'}
+    return {color: '#1ADEE5'}
   else
     return {color: '#ffffff'}
 }
+const appBarStyle = {
+  backgroundColor: '#7D2DEE',
+  boxShadow: 'none'
+}
 
 const Menu = withRouter(({history}) => (
-  <AppBar position="static">
+  <AppBar position="static" style={appBarStyle}>
     <Toolbar>
         <Typography type="title" color="inherit">
             SUPERMERK2
@@ -43,7 +47,7 @@ const Menu = withRouter(({history}) => (
         {/*</Link>*/}
         <Link to="/cart">
           <Button style={isActive(history, "/cart")}>
-            <Badge color="secondary" badgeContent={cart.itemTotal()}>
+            <Badge color="error" badgeContent={cart.itemTotal()}>
               <CartIcon />
             </Badge>
           </Button>
