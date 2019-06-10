@@ -27,26 +27,29 @@ const isPartActive = (history, path) => {
 }
 
 const Menu = withRouter(({history}) => (
-    <AppBar position="static">
-        <Toolbar>
-            <Typography type="title" color="inherit">
-                SUPERMERK2
-            </Typography>
-            <div>
-                <Link to="/">
-                    <IconButton aria-label="Home" style={isActive(history, "/")}>
-                        <HomeIcon/>
-                    </IconButton>
-                </Link>
-                {/*<Link to="/cart">*/}
-                    {/*<Button style={isActive(history, "/cart")}>*/}
-                        {/*<Badge color="secondary" badgeContent={cart.itemTotal()}>*/}
-                            {/*<CartIcon/>*/}
-                        {/*</Badge>*/}
-                    {/*</Button>*/}
-                {/*</Link>*/}
-            </div>
-            <div style={{'position': 'absolute', 'right': '10px'}}><span style={{'float': 'right'}}>
+  <AppBar position="static" style={{backgroundColor: '#7D2DEE', boxShadow: 'none'}}>
+    <Toolbar>
+        <Typography type="title" color="inherit">
+            SUPERMERK2
+        </Typography>
+      <div>
+          <Link to="/">
+              <IconButton aria-label="Home" style={isActive(history, "/")}>
+                  <HomeIcon/>
+              </IconButton>
+          </Link>
+        {/*<Link to="/shops/all">*/}
+          {/*<Button style={isActive(history, "/shops/all")}>All Shops</Button>*/}
+        {/*</Link>*/}
+        {/*<Link to="/cart">*/}
+          {/*<Button style={isActive(history, "/cart")}>*/}
+            {/*<Badge color="error" badgeContent={cart.itemTotal()}>*/}
+              {/*<CartIcon />*/}
+            {/*</Badge>*/}
+          {/*</Button>*/}
+        {/*</Link>*/}
+      </div>
+      <div style={{'position':'absolute', 'right': '10px'}}><span style={{'float': 'right'}}>
       {
           !auth.isAuthenticated() && (<span>
           <Link to="/signup">

@@ -13,8 +13,7 @@ import Products from './Products'
 const styles = theme => ({
   card: {
     margin: 'auto',
-    textAlign: 'center',
-    backgroundColor: '#80808024'
+    textAlign: 'center'
   },
   menu: {
     width: 200,
