@@ -64,6 +64,7 @@ class Products extends Component {
                 // actionIcon={
                 //   <AddToCart item={product}/>
                 // }
+
               />
             </GridListTile>
           ))}
