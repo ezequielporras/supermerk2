@@ -10,12 +10,12 @@ const signin = (req, res) => {
 
     if (err || !user)
       return res.status('401').json({
-        error: "User not found"
+        error: "Usuario no encontrado"
       })
 
     if (!user.authenticate(req.body.password)) {
       return res.status('401').send({
-        error: "Email and password don't match."
+        error: "Email o password incorrectos"
       })
     }
 
@@ -29,7 +29,7 @@ const signin = (req, res) => {
 
     return res.json({
       token,
-      user: {_id: user._id, name: user.name, email: user.email, seller: user.seller}
+      user: {_id: user._id, name: user.name, email: user.email, seller: user.seller, employee: user.employee}
     })
 
   })
@@ -51,7 +51,7 @@ const hasAuthorization = (req, res, next) => {
   const authorized = req.profile && req.auth && req.profile._id == req.auth._id
   if (!(authorized)) {
     return res.status('403').json({
-      error: "User is not authorized"
+      error: "Usuario no autorizado"
     })
   }
   next()

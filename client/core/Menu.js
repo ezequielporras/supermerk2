@@ -14,48 +14,41 @@ import Badge from 'material-ui/Badge'
 import cart from './../cart/cart-helper'
 
 const isActive = (history, path) => {
-  if (history.location.pathname == path)
-    return {color: '#1ADEE5'}
-  else
-    return {color: '#ffffff'}
+    if (history.location.pathname == path)
+        return {color: '#bef67a'}
+    else
+        return {color: '#ffffff'}
 }
 const isPartActive = (history, path) => {
-  if (history.location.pathname.includes(path))
-    return {color: '#1ADEE5'}
-  else
-    return {color: '#ffffff'}
-}
-const appBarStyle = {
-  backgroundColor: '#7D2DEE',
-  boxShadow: 'none'
+    if (history.location.pathname.includes(path))
+        return {color: '#bef67a'}
+    else
+        return {color: '#ffffff'}
 }
 
 const Menu = withRouter(({history}) => (
-  <AppBar position="static" style={appBarStyle}>
-    <Toolbar>
-        <Typography type="title" color="inherit">
-            SUPERMERK2
-        </Typography>
-      <div>
-          <Link to="/">
-              <IconButton aria-label="Home" style={isActive(history, "/")}>
-                  <HomeIcon/>
-              </IconButton>
-          </Link>
-        {/*<Link to="/shops/all">*/}
-          {/*<Button style={isActive(history, "/shops/all")}>All Shops</Button>*/}
-        {/*</Link>*/}
-        <Link to="/cart">
-          <Button style={isActive(history, "/cart")}>
-            <Badge color="error" badgeContent={cart.itemTotal()}>
-              <CartIcon />
-            </Badge>
-          </Button>
-        </Link>
-      </div>
-      <div style={{'position':'absolute', 'right': '10px'}}><span style={{'float': 'right'}}>
+    <AppBar position="static">
+        <Toolbar>
+            <Typography type="title" color="inherit">
+                SUPERMERK2
+            </Typography>
+            <div>
+                <Link to="/">
+                    <IconButton aria-label="Home" style={isActive(history, "/")}>
+                        <HomeIcon/>
+                    </IconButton>
+                </Link>
+                {/*<Link to="/cart">*/}
+                    {/*<Button style={isActive(history, "/cart")}>*/}
+                        {/*<Badge color="secondary" badgeContent={cart.itemTotal()}>*/}
+                            {/*<CartIcon/>*/}
+                        {/*</Badge>*/}
+                    {/*</Button>*/}
+                {/*</Link>*/}
+            </div>
+            <div style={{'position': 'absolute', 'right': '10px'}}><span style={{'float': 'right'}}>
       {
-        !auth.isAuthenticated() && (<span>
+          !auth.isAuthenticated() && (<span>
           <Link to="/signup">
             <Button style={isActive(history, "/signup")}>Registrarse
             </Button>
@@ -66,20 +59,24 @@ const Menu = withRouter(({history}) => (
           </Link>
         </span>)
       }
-      {
-        auth.isAuthenticated() && (<span>
-          {auth.isAuthenticated().user.seller && (<Link to="/seller/shops"><Button style={isPartActive(history, "/seller/")}>Tienda</Button></Link>)}
-          <Link to={"/user/" + auth.isAuthenticated().user._id}>
+                {auth.isAuthenticated().user && auth.isAuthenticated().user.employee && <Link to="/shops/all">
+                    <Button style={isActive(history, "/shops/all")}>Proveedores</Button>
+                </Link>}
+                {
+                    auth.isAuthenticated() && (<span>
+          {auth.isAuthenticated().user.seller && (
+              <Link to="/seller/shops"><Button style={isPartActive(history, "/seller/")}>Tienda</Button></Link>)}
+                        <Link to={"/user/" + auth.isAuthenticated().user._id}>
             <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}><AccountCircleIcon/></Button>
           </Link>
           <Button color="inherit" onClick={() => {
               auth.signout(() => history.push('/'))
-            }}><ExitToAppIcon/> </Button>
+          }}><ExitToAppIcon/> </Button>
         </span>)
-      }
+                }
       </span></div>
-    </Toolbar>
-  </AppBar>
+        </Toolbar>
+    </AppBar>
 ))
 
 export default Menu

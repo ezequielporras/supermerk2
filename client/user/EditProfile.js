@@ -122,7 +122,7 @@ class EditProfile extends Component {
                       checked={this.state.seller}
                       onChange={this.handleCheck}
               />}
-            label={this.state.seller? 'Active' : 'Inactive'}
+            label={this.state.seller? 'Activo' : 'Inactivo'}
           />
           <br/> {
             this.state.error && (<Typography component="p" color="error">

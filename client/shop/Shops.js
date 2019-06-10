@@ -59,7 +59,7 @@ class Shops extends Component {
     <div>
       <Paper className={classes.root} elevation={4}>
         <Typography type="title" className={classes.title}>
-          Tiendas
+            Proveedores
         </Typography>
         <List dense>
           {this.state.shops.map((shop, i) => {
