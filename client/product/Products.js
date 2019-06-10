@@ -38,14 +38,13 @@ const styles = theme => ({
   },
   tileBar: {
     backgroundColor: 'rgba(0, 0, 0, 0.72)',
-    textAlign: 'left'
+    textAlign: 'center'
   },
   tileTitle: {
     fontSize:'1.1em',
     marginBottom:'5px',
     display:'block',
-    color: '#fff',
-    textShadow: '#fff 1px 1px 2px'
+    color: '#fff'
   }
 })
 class Products extends Component {

@@ -16,20 +16,18 @@ const styles = theme => ({
     textAlign: 'center'
   },
   menu: {
-    width: 200,
+    width: 200
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     width: 230,
     verticalAlign: 'bottom',
     marginBottom: '15px'
   },
   searchField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     width: 300,
-    marginBottom: '15px'
+    marginBottom: '15px',
+    marginLeft: '10px',
+    marginRight: '10px'
   },
   searchButton: {
     minWidth: '20px',
