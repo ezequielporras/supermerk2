@@ -15,13 +15,13 @@ import cart from './../cart/cart-helper'
 
 const isActive = (history, path) => {
     if (history.location.pathname == path)
-        return {color: '#bef67a'}
+        return {color: '#1ADEE5'}
     else
         return {color: '#ffffff'}
 }
 const isPartActive = (history, path) => {
     if (history.location.pathname.includes(path))
-        return {color: '#bef67a'}
+        return {color: '#1ADEE5'}
     else
         return {color: '#ffffff'}
 }
@@ -32,7 +32,7 @@ const Menu = withRouter(({history}) => (
         <Typography type="title" color="inherit">
             SUPERMERK2
         </Typography>
-      <div>
+      <div style={{marginLeft: '10px'}}>
           <Link to="/">
               <IconButton aria-label="Home" style={isActive(history, "/")}>
                   <HomeIcon/>

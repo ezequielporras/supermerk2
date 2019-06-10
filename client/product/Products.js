@@ -34,7 +34,7 @@ const styles = theme => ({
     textAlign: 'center'
   },
   image: {
-    height: '100%'
+    height: '70%'
   },
   tileBar: {
     backgroundColor: 'rgba(0, 0, 0, 0.72)',
@@ -43,8 +43,9 @@ const styles = theme => ({
   tileTitle: {
     fontSize:'1.1em',
     marginBottom:'5px',
-    color:'rgb(189, 222, 219)',
-    display:'block'
+    display:'block',
+    color: '#fff',
+    textShadow: '#fff 1px 1px 2px'
   }
 })
 class Products extends Component {
@@ -54,16 +55,16 @@ class Products extends Component {
       <div className={classes.root}>
       {this.props.products.length > 0 ?
         (<div className={classes.container}>
-          <GridList cellHeight={200} className={classes.gridList} cols={3}>
+          <GridList cellHeight={200} className={classes.gridList} cols={4}>
           {this.props.products.map((product, i) => (
             <GridListTile key={i} className={classes.tile}>
               <Link to={"/product/"+product._id}><img className={classes.image} src={'/api/product/image/'+product._id} alt={product.name} /></Link>
               <GridListTileBar className={classes.tileBar}
                 title={<Link to={"/product/"+product._id} className={classes.tileTitle}>{product.name}</Link>}
                 subtitle={<span>$ {product.price}</span>}
-                // actionIcon={
-                //   <AddToCart item={product}/>
-                // }
+                //actionIcon={
+                //  <AddToCart item={product}/>
+                //}
               />
             </GridListTile>
           ))}
