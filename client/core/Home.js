@@ -8,8 +8,7 @@ import Categories from './../product/Categories'
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
-    margin: 30,
+    flexGrow: 1
   }
 })
 
@@ -30,7 +29,7 @@ class Home extends Component {
     const {classes} = this.props
     return (
       <div className={classes.root}>
-        <Grid container spacing={24}>
+        <Grid container spacing={24} style={{textAlign: 'center'}}>
           <Grid item xs={12} sm={12}>
             <Search categories={this.state.categories}/>
             {/*<Categories categories={this.state.categories}/>*/}

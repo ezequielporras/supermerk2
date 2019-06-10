@@ -25,13 +25,9 @@ const isPartActive = (history, path) => {
   else
     return {color: '#ffffff'}
 }
-const appBarStyle = {
-  backgroundColor: '#7D2DEE',
-  boxShadow: 'none'
-}
 
 const Menu = withRouter(({history}) => (
-  <AppBar position="static" style={appBarStyle}>
+  <AppBar position="static" style={{backgroundColor: '#7D2DEE', boxShadow: 'none'}}>
     <Toolbar>
         <Typography type="title" color="inherit">
             SUPERMERK2
