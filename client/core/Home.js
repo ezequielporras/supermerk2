@@ -33,7 +33,7 @@ class Home extends Component {
         <Grid container spacing={24}>
           <Grid item xs={12} sm={12}>
             <Search categories={this.state.categories}/>
-            <Categories categories={this.state.categories}/>
+            {/*<Categories categories={this.state.categories}/>*/}
           </Grid>
         </Grid>
       </div>

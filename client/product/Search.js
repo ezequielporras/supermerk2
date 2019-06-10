@@ -47,13 +47,25 @@ class Search extends Component {
       results: [],
       searched: false
   }
+
+  componentDidMount() {
+      list({
+          search: this.state.search || undefined, category: this.state.category
+      }).then((data) => {
+          if (data.error) {
+              console.log(data.error)
+          } else {
+              this.setState({results: data, searched:true})
+          }
+      })
+  }
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     })
   }
   search = () => {
-    if(this.state.search){
       list({
         search: this.state.search || undefined, category: this.state.category
       }).then((data) => {
@@ -63,7 +75,6 @@ class Search extends Component {
           this.setState({results: data, searched:true})
         }
       })
-    }
   }
   enterKey = (event) => {
     if(event.keyCode == 13){
