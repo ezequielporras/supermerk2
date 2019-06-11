@@ -41,13 +41,13 @@ const Menu = withRouter(({history}) => (
         {/*<Link to="/shops/all">*/}
           {/*<Button style={isActive(history, "/shops/all")}>All Shops</Button>*/}
         {/*</Link>*/}
-        {/*<Link to="/cart">*/}
-          {/*<Button style={isActive(history, "/cart")}>*/}
-            {/*<Badge color="error" badgeContent={cart.itemTotal()}>*/}
-              {/*<CartIcon />*/}
-            {/*</Badge>*/}
-          {/*</Button>*/}
-        {/*</Link>*/}
+        <Link to="/cart">
+          <Button style={isActive(history, "/cart")}>
+            <Badge color="error" badgeContent={cart.itemTotal()}>
+              <CartIcon />
+            </Badge>
+          </Button>
+        </Link>
       </div>
       <div style={{'position':'absolute', 'right': '10px'}}><span style={{'float': 'right'}}>
       {
