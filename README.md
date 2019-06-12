@@ -1,43 +1,68 @@
-# Supermerk2 Marketplace
+# SUPERMERK2
 
-An online marketplace application with seller accounts, product search and suggestions, shopping cart, order management, and payment processing with Stripe - developed using React, Node, Express and MongoDB. 
+TPO Integración de Aplicaciones - PINAMAR . Grupo Supermercado
 
-![MERN Marketplace](https://s3.amazonaws.com/mernbook/git+/marketplace.png "MERN Marketplace")
+Un marketplace online, con cuentas para vendedores y la posibilidad de comprar online nuestros productos. Además, admite el proceso de pagos con tarjeta crédito / débito. 
 
-### [Live Demo](http://marketplace.mernbook.com/ "MERN Marketplace")
+Desarrollado utilizando React, Node, MongoDB
 
-#### What you need to run this code
-1. Node (8.11.1)
-2. NPM (5.8.0)
-3. MongoDB (3.6.3)
-4. Stripe account with test data
+## Instalación
 
-####  How to run this code
-1. Make sure MongoDB is running on your system 
-2. Clone this repository
-3. Update config/config.js with your test values for Stripe API keys and Stripe Connect Client ID 
-4. Open command line in the cloned folder,
-   - To install dependencies, run ```  npm install  ```
-   - To run the application for development, run ```  npm run development  ```
-5. Open [localhost:3000](http://localhost:3000/) in the browser
----- 
-### More applications built using this stack
 
-* [MERN Skeleton](https://github.com/shamahoque/mern-skeleton)
-* [MERN Social](https://github.com/shamahoque/mern-social)
-* [MERN Mediastream](https://github.com/shamahoque/mern-mediastream)
-* [MERN VR Game](https://github.com/shamahoque/mern-vrgame)
-----
-## Get the book
-#### [Full-Stack React Projects](https://www.packtpub.com/web-development/full-stack-react-projects)
-*Unleash the power of MERN stack by building diverse web applications using React, Node.js, Express, and MongoDB*
+Requerimientos para su uso
+```bash
+Node (8.11.1)
+NPM (5.8.0)
+MongoDB (3.6.3)
+Chrome, IE 
+```
 
-<a href="https://www.packtpub.com/web-development/full-stack-react-projects"><img src="https://s3.amazonaws.com/mernbook/git+/B09550_MockupSmall.png" align="center" width="400" alt="Full-Stack React Projects"></a>
+## Documentación
 
-The benefits of using a full JavaScript stack for web development are undeniable, especially when robust and widely adopted technologies such as React, Node, and Express and are available. Combining the power of React with industry-tested, server-side technologies, such as Node, Express, and MongoDB, creates a diverse array of possibilities when developing real-world web applications.
+- [Manual de usuario](https://docs.google.com/document/d/1SGXizcbZat9voJW7ieSECvNRpl_X-SaPPtZhhoC_Zrg/edit?usp=sharing
+).
+- [Especificación de requerimientos del sistema - ERS](https://docs.google.com/document/d/1E2hdFEvkaLxDvbsZ04jTux8xjZowxp6JIAxUtfx0HNU/edit?usp=sharing
+).
+- [Manual de integración](https://docs.google.com/document/d/19esJclaRjD5fgAuY661NhoxKk9cQrTuuwoePSd0ITG0/edit?usp=sharing
+).
+- [Diagrama de BD](https://docs.google.com/presentation/d/1pO5lXy12fLpZ0NR7Q2ONpVmgBOfhGuaYeQDZPx7m9D8/edit?usp=sharing
+).
+- [Mapa de arquitectura](https://drive.google.com/open?id=1u7gq8nTfRZhlyn6VlL4znGXYUbemZaW1
+).
 
-This book guides you through preparing the development environment for MERN stack-based web development, to creating a basic skeleton application and extending it to build four different web applications. These applications include a social media, an online marketplace, a media streaming, and a web-based game application with virtual reality features.
 
-While learning to set up the stack and developing a diverse range of applications with this book, you will grasp the inner workings of the MERN stack, extend its capabilities for complex features, and gain actionable knowledge of how to prepare MERN-based applications to meet the growing demands of real-world web applications.
 
----
+
+## Uso
+
+```python
+# Modo desarrollo
+
+npm install
+
+npm run development 
+```
+
+```python
+# Modo productivo
+
+npm install
+
+npm run start
+```
+
+
+
+## Agradecimiento
+```python
+# Integrantes del grupo
+
+De Pina, Germán
+Porras, Ezequiel
+Russo, Christian
+Souto, Alan
+```
+![capi_bailarin](https://media.giphy.com/media/mDN01MIRhJnQjMQTUg/giphy.gif)
+
+
+## Gracias!
