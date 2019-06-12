@@ -1,4 +1,3 @@
-import config from './../../config/config'
 const create = (user) => {
   return fetch('/api/users/', {
       method: 'POST',
@@ -61,21 +60,6 @@ const remove = (params, credentials) => {
   }).catch((err) => console.log(err))
 }
 
-const stripeUpdate = (params, credentials, auth_code) => {
-  return fetch('/api/stripe_auth/'+params.userId, {
-    method: 'PUT',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + credentials.t
-    },
-    body: JSON.stringify({stripe: auth_code})
-  }).then((response)=> {
-    return response.json()
-  }).catch((err) => {
-    console.log(err)
-  })
-}
 
 export {
   create,
@@ -83,5 +67,4 @@ export {
   read,
   update,
   remove,
-  stripeUpdate
 }

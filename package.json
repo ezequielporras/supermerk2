@@ -17,7 +17,7 @@
   "scripts": {
     "development": "nodemon",
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
-    "start": "NODE_ENV=production node ./dist/server.generated.js",
+    "start": "NODE_ENV=production node $NODE_DEBUG_OPTION ./dist/server.generated.js",
     "start-dev": "webpack --mode=development --config webpack.config.server.js && node --inspect ./dist/server.generated.js"
   },
   "engines": {
@@ -54,12 +54,12 @@
     "mongoose": "5.0.16",
     "query-string": "6.0.0",
     "react": "16.3.2",
+    "react-credit-card-input": "^1.1.5",
     "react-dom": "16.3.2",
     "react-hot-loader": "4.1.2",
     "react-router": "4.2.0",
     "react-router-dom": "4.2.2",
-    "react-stripe-elements": "1.6.0",
     "request": "2.85.0",
-    "stripe": "5.8.0"
+    "styled-components": "^4.3.1"
   }
 }

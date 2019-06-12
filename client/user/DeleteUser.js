@@ -9,36 +9,37 @@ import {remove} from './api-user.js'
 import {Redirect, Link} from 'react-router-dom'
 
 class DeleteUser extends Component {
-  state = {
-    redirect: false,
-    open: false
-  }
-  clickButton = () => {
-    this.setState({open: true})
-  }
-  deleteAccount = () => {
-    const jwt = auth.isAuthenticated()
-    remove({
-      userId: this.props.userId
-    }, {t: jwt.token}).then((data) => {
-      if (data.error) {
-        console.log(data.error)
-      } else {
-        auth.signout(() => console.log('deleted'))
-        this.setState({redirect: true})
-      }
-    })
-  }
-  handleRequestClose = () => {
-    this.setState({open: false})
-  }
-  render() {
-    const redirect = this.state.redirect
-    if (redirect) {
-      return <Redirect to='/'/>
+    state = {
+        redirect: false,
+        open: false
     }
-    return (<span>
-      <IconButton aria-label="Delete" onClick={this.clickButton} color="secondary">
+    clickButton = () => {
+        this.setState({open: true})
+    }
+    deleteAccount = () => {
+        const jwt = auth.isAuthenticated()
+        remove({
+            userId: this.props.userId
+        }, {t: jwt.token}).then((data) => {
+            if (data.error) {
+                console.log(data.error)
+            } else {
+                auth.signout(() => console.log('deleted'))
+                this.setState({redirect: true})
+            }
+        })
+    }
+    handleRequestClose = () => {
+        this.setState({open: false})
+    }
+
+    render() {
+        const redirect = this.state.redirect
+        if (redirect) {
+            return <Redirect to='/'/>
+        }
+        return (<span>
+      <IconButton aria-label="Delete" onClick={this.clickButton} color={this.props.color || 'secondary'}>
         <DeleteIcon/>
       </IconButton>
 
@@ -59,9 +60,12 @@ class DeleteUser extends Component {
         </DialogActions>
       </Dialog>
     </span>)
-  }
+    }
 }
+
 DeleteUser.propTypes = {
-  userId: PropTypes.string.isRequired
+    userId: PropTypes.string.isRequired,
+    color: PropTypes.string
 }
+
 export default DeleteUser

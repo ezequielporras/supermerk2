@@ -8,7 +8,6 @@ import Icon from 'material-ui/Icon'
 import auth from './../auth/auth-helper'
 import cart from './cart-helper.js'
 import PlaceOrder from './PlaceOrder'
-import {Elements} from 'react-stripe-elements'
 
 const styles = theme => ({
   card: {
@@ -78,12 +77,12 @@ class Checkout extends Component {
     return (
       <Card className={classes.card}>
         <Typography type="title" className={classes.title}>
-          Checkout
+          Comprar
         </Typography>
-        <TextField id="name" label="Nombre" className={classes.textField} value={this.state.checkoutDetails.customer_name} onChange={this.handleCustomerChange('customer_name')} margin="normal"/><br/>
-        <TextField id="email" type="email" label="Email" className={classes.textField} value={this.state.checkoutDetails.customer_email} onChange={this.handleCustomerChange('customer_email')} margin="normal"/><br/>
+        <TextField disabled id="name" label="Nombre" className={classes.textField} value={this.state.checkoutDetails.customer_name} onChange={this.handleCustomerChange('customer_name')} margin="normal"/><br/>
+        <TextField disabled id="email" type="email" label="Email" className={classes.textField} value={this.state.checkoutDetails.customer_email} onChange={this.handleCustomerChange('customer_email')} margin="normal"/><br/>
         <Typography type="subheading" component="h3" className={classes.subheading}>
-            Delivery Address
+            ¿Donde lo enviamos?
         </Typography>
         <TextField id="street" label="Dirección" className={classes.streetField} value={this.state.checkoutDetails.delivery_address.street} onChange={this.handleAddressChange('street')} margin="normal"/><br/>
         <TextField id="city" label="Ciudad" className={classes.addressField} value={this.state.checkoutDetails.delivery_address.city} onChange={this.handleAddressChange('city')} margin="normal"/>
@@ -96,9 +95,7 @@ class Checkout extends Component {
                 {this.state.error}</Typography>)
           }
         <div>
-          <Elements>
             <PlaceOrder checkoutDetails={this.state.checkoutDetails} />
-          </Elements>
         </div>
       </Card>)
   }

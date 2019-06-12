@@ -8,10 +8,10 @@ import userCtrl from '../controllers/user.controller'
 const router = express.Router()
 
 router.route('/api/orders/:userId')
-  .post(authCtrl.requireSignin, userCtrl.stripeCustomer, productCtrl.decreaseQuantity, orderCtrl.create)
+  .post(authCtrl.requireSignin, productCtrl.decreaseQuantity, orderCtrl.create)
 
 router.route('/api/orders/shop/:shopId')
-  .get(authCtrl.requireSignin, shopCtrl.isOwner, orderCtrl.listByShop)
+  .get(authCtrl.requireSignin, orderCtrl.listByShop)
 
 router.route('/api/orders/user/:userId')
   .get(authCtrl.requireSignin, orderCtrl.listByUser)
@@ -26,7 +26,7 @@ router.route('/api/order/:orderId/charge/:userId/:shopId')
   .put(authCtrl.requireSignin, shopCtrl.isOwner, userCtrl.createCharge, orderCtrl.update)
 
 router.route('/api/order/status/:shopId')
-  .put(authCtrl.requireSignin, shopCtrl.isOwner, orderCtrl.update)
+  .put(authCtrl.requireSignin, orderCtrl.update)
 
 router.route('/api/order/:orderId')
   .get(orderCtrl.read)

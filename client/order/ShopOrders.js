@@ -77,7 +77,7 @@ class ShopOrders extends Component {
     <div>
       <Paper className={classes.root} elevation={4}>
         <Typography type="title" className={classes.title}>
-          Orders in {this.match.params.shop}
+          Ordenes en {this.match.params.shop}
         </Typography>
         <List dense >
           {this.state.orders.map((order, index) => {
@@ -90,7 +90,7 @@ class ShopOrders extends Component {
                 <ProductOrderEdit shopId={this.match.params.shopId} order={order} orderIndex={index} updateOrders={this.updateOrders}/>
                 <div className={classes.customerDetails}>
                   <Typography type="subheading" component="h3" className={classes.subheading}>
-                    Deliver to:
+                    Eviado a:
                   </Typography>
                   <Typography type="subheading" component="h3" color="primary"><strong>{order.customer_name}</strong> ({order.customer_email})</Typography>
                   <Typography type="subheading" component="h3" color="primary">{order.delivery_address.street}</Typography>

@@ -5,8 +5,8 @@ const CartItemSchema = new mongoose.Schema({
   quantity: Number,
   shop: {type: mongoose.Schema.ObjectId, ref: 'Shop'},
   status: {type: String,
-    default: 'Not processed',
-    enum: ['Not processed' , 'Processing', 'Shipped', 'Delivered', 'Cancelled']}
+    default: 'Pendiente',
+    enum: ['Pendiente' , 'En proceso', 'En camino', 'Entregado', 'Cancelado']}
 })
 const CartItem = mongoose.model('CartItem', CartItemSchema)
 const OrderSchema = new mongoose.Schema({
@@ -30,6 +30,7 @@ const OrderSchema = new mongoose.Schema({
     country: {type: String, required: 'Country is required'}
   },
   payment_id: {},
+    payment_method: {type: String},
   updated: Date,
   created: {
     type: Date,

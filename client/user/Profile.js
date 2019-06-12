@@ -15,7 +15,6 @@ import auth from './../auth/auth-helper'
 import {read} from './api-user.js'
 import {Redirect, Link} from 'react-router-dom'
 import config from './../../config/config'
-import stripeButton from './../assets/images/stripeButton.png'
 import MyOrders from './../order/MyOrders'
 
 const styles = theme => ({
@@ -28,13 +27,6 @@ const styles = theme => ({
   title: {
     margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 2}px`,
     color: theme.palette.protectedTitle
-  },
-  stripe_connect: {
-    marginRight: '10px',
-  },
-  stripe_connected: {
-    verticalAlign: 'super',
-    marginRight: '10px'
   }
 })
 
@@ -84,14 +76,14 @@ class Profile extends Component {
               </Avatar>
             </ListItemAvatar>
             <ListItemText primary={this.state.user.name} secondary={this.state.user.email}/> {
-             auth.isAuthenticated().user && auth.isAuthenticated().user._id == this.state.user._id &&
+              auth.isAuthenticated().user && (auth.isAuthenticated().user._id == this.state.user._id || auth.isAuthenticated().user.employee  ) &&
              (<ListItemSecondaryAction>
                <Link to={"/user/edit/" + this.state.user._id}>
                  <IconButton aria-label="Edit" color="primary">
                    <Edit/>
                  </IconButton>
                </Link>
-               <DeleteUser userId={this.state.user._id}/>
+               <DeleteUser userId={this.state.user._id} />
              </ListItemSecondaryAction>)
             }
           </ListItem>

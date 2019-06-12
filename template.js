@@ -12,7 +12,7 @@ export default ({markup, css}) => {
               }
           </style>
         </head>
-        <body style="margin:0">
+        <body style="margin:0;font-family: 'Proxima Nova',-apple-system,'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif,sans-serif;">
           <div id="root">${markup}</div>
           <style id="jss-server-side">${css}</style>
           <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>

@@ -173,10 +173,10 @@ class CartItems extends Component {
         <div className={classes.checkout}>
           <span className={classes.total}>Total: ${this.getTotal()}</span>
           {!this.props.checkout && (auth.isAuthenticated()?
-            <Button color="secondary" variant="raised" onClick={this.openCheckout}>Checkout</Button>
+            <Button color="secondary" variant="raised" onClick={this.openCheckout}>Comprar</Button>
             :
             <Link to="/signin">
-              <Button color="primary" variant="raised">Ingresa para hacer el checkout</Button>
+              <Button color="primary" variant="raised">Ingresa para comprar</Button>
             </Link>)}
           <Link to='/' className={classes.continueBtn}>
             <Button variant="raised">Continuar comprando</Button>

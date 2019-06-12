@@ -27,29 +27,29 @@ const isPartActive = (history, path) => {
 }
 
 const Menu = withRouter(({history}) => (
-  <AppBar position="static" style={{backgroundColor: '#7D2DEE', boxShadow: 'none'}}>
-    <Toolbar>
-        <Typography type="title" color="inherit">
-            SUPERMERK2
-        </Typography>
-      <div style={{marginLeft: '10px'}}>
-          <Link to="/">
-              <IconButton aria-label="Home" style={isActive(history, "/")}>
-                  <HomeIcon/>
-              </IconButton>
-          </Link>
-        {/*<Link to="/shops/all">*/}
-          {/*<Button style={isActive(history, "/shops/all")}>All Shops</Button>*/}
-        {/*</Link>*/}
-        <Link to="/cart">
-          <Button style={isActive(history, "/cart")}>
-            <Badge color="error" badgeContent={cart.itemTotal()}>
-              <CartIcon />
-            </Badge>
-          </Button>
-        </Link>
-      </div>
-      <div style={{'position':'absolute', 'right': '10px'}}><span style={{'float': 'right'}}>
+    <AppBar position="static" style={{backgroundColor: '#7D2DEE', boxShadow: 'none'}}>
+        <Toolbar>
+            <Typography type="title" color="inherit">
+                SUPERMERK2
+            </Typography>
+            <div style={{marginLeft: '10px'}}>
+                <Link to="/">
+                    <IconButton aria-label="Home" style={isActive(history, "/")}>
+                        <HomeIcon/>
+                    </IconButton>
+                </Link>
+                {/*<Link to="/shops/all">*/}
+                {/*<Button style={isActive(history, "/shops/all")}>All Shops</Button>*/}
+                {/*</Link>*/}
+                <Link to="/cart">
+                    <Button style={isActive(history, "/cart")}>
+                        <Badge color="error" badgeContent={cart.itemTotal()}>
+                            <CartIcon/>
+                        </Badge>
+                    </Button>
+                </Link>
+            </div>
+            <div style={{'position': 'absolute', 'right': '10px'}}><span style={{'float': 'right'}}>
       {
           !auth.isAuthenticated() && (<span>
           <Link to="/signup">
@@ -64,7 +64,12 @@ const Menu = withRouter(({history}) => (
       }
                 {auth.isAuthenticated().user && auth.isAuthenticated().user.employee && <Link to="/shops/all">
                     <Button style={isActive(history, "/shops/all")}>Proveedores</Button>
-                </Link>}
+                </Link>
+                }
+                {auth.isAuthenticated().user && auth.isAuthenticated().user.employee && <Link to="/users">
+                    <Button style={isActive(history, "/users")}>Empleados</Button>
+                </Link>
+                }
                 {
                     auth.isAuthenticated() && (<span>
           {auth.isAuthenticated().user.seller && (

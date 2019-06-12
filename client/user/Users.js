@@ -32,6 +32,7 @@ class Users extends Component {
       if (data.error) {
         console.log(data.error)
       } else {
+
         this.setState({users: data})
       }
     })
