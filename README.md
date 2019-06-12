@@ -62,7 +62,7 @@ Porras, Ezequiel
 Russo, Christian
 Souto, Alan
 ```
-
+![capi_bailarin](https://media.giphy.com/media/mDN01MIRhJnQjMQTUg/giphy.gif)
 
 
 ## Gracias!
