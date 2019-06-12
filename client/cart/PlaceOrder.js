@@ -54,10 +54,14 @@ class PlaceOrder extends Component {
     }
 
     placeOrder = () => {
+        const card = {
+            cardNumber: this.state.cardNumber,
+            cvc: this.state.cvc,
+        }
         const jwt = auth.isAuthenticated();
         create({userId: jwt.user._id}, {
             t: jwt.token
-        }, { ...this.props.checkoutDetails, payment_method: this.state.paymentMethod }, null).then((data) => {
+        }, { ...this.props.checkoutDetails, payment_method: this.state.paymentMethod }, card ).then((data) => {
             if (data.error) {
                 this.setState({error: data.error})
             } else {

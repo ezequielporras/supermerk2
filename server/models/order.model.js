@@ -31,6 +31,9 @@ const OrderSchema = new mongoose.Schema({
   },
   payment_id: {},
     payment_method: {type: String},
+    payment_status: {type: String,
+        default: 'Pendiente',
+        enum: ['Pendiente' , 'Pagado', 'Cancelado']},
   updated: Date,
   created: {
     type: Date,

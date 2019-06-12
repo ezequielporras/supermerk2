@@ -51,6 +51,7 @@ class EditProfile extends Component {
             password: '',
             seller: false,
             employee: false,
+            cbu: '',
             redirectToProfile: false,
             error: ''
         }
@@ -65,7 +66,7 @@ class EditProfile extends Component {
             if (data.error) {
                 this.setState({error: data.error})
             } else {
-                this.setState({name: data.name, email: data.email, seller: data.seller, employee: data.employee})
+                this.setState({name: data.name, email: data.email, seller: data.seller, employee: data.employee, cbu: data.cbu})
             }
         })
     }
@@ -76,7 +77,8 @@ class EditProfile extends Component {
             email: this.state.email || undefined,
             password: this.state.password || undefined,
             seller: this.state.seller,
-            employee: this.state.employee
+            employee: this.state.employee,
+            cbu: this.state.cbu,
         }
         update({
             userId: this.match.params.userId
@@ -140,6 +142,8 @@ class EditProfile extends Component {
                                value={this.state.email} onChange={this.handleChange('email')} margin="normal"/><br/>
                     <TextField id="password" type="password" label="Password" className={classes.textField}
                                value={this.state.password} onChange={this.handleChange('password')} margin="normal"/>
+                    <TextField id="cbu" type="text" label="CBU" className={classes.textField}
+                               value={this.state.cbu} onChange={this.handleChange('cbu')} margin="normal"/>
                     <Typography type="subheading" component="h4" className={classes.subheading}>
                         Cuenta proveedor
                     </Typography>

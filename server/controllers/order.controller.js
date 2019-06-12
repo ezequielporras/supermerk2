@@ -1,9 +1,12 @@
 import {Order, CartItem} from '../models/order.model'
 import _ from 'lodash'
 import errorHandler from './../helpers/dbErrorHandler'
+import request from 'request'
+const ESTABLISHMENT = 6;
 
-const create = (req, res) => {
+const create = (req, res, next) => {
   req.body.order.user = req.profile
+
   const order = new Order(req.body.order)
   order.save((err, result) => {
     if (err) {
@@ -11,9 +14,43 @@ const create = (req, res) => {
         error: errorHandler.getErrorMessage(err)
       })
     }
-    res.status(200).json(result)
+    req.order = result;
+    next();
+    //res.status(200).json(result)
   })
 }
+
+const processCredit = (card, req, total, res, next) => {
+    const url = `http://paypauli.herokuapp.com/api/txn/?tarjeta=${card.cardNumber.replace(/\s+/g, '')}&idEstablecimiento=${ESTABLISHMENT}&nroComprobante=${Math.floor(Math.random() * 999999)}&detalleTransaccion=Supermerk2 Order:${req.order._id}&importeTotal=${total}&cuotas=1&cvc=${card.cvc}`;
+    request({
+        url: encodeURI(url),
+        method: "GET",
+        json: true,
+    }, (error, response, body) => {
+        //update user
+        if (body.error) {
+            return res.status('400').json({
+                error: body.error_description
+            })
+        }
+        req.paypauliTransaction = body.transaccion;
+        next()
+    })
+}
+
+const processPayment = (req, res, next) => {
+  const card = req.body.card;
+  const total = req.body.order.products.reduce((a, b) => {
+        return a + (b.quantity*b.product.price)
+    }, 0);
+  if (req.order.payment_method === 'Credito') {
+    processCredit(card, req, total, res, next);
+  } else {
+
+  }
+}
+
+
 
 const listByShop = (req, res) => {
   Order.find({"products.shop": req.shop._id})
@@ -39,6 +76,20 @@ const update = (req, res) => {
         })
       }
       res.json(order)
+    })
+}
+
+const updateById = (req, res) => {
+    Order.update({'_id':req.order._id}, {'$set': {
+            'payment_id': req.paypauliTransaction,
+            'payment_status': 'Pagado'
+        }}, (err, order) => {
+        if (err) {
+            return res.status(400).send({
+                error: errorHandler.getErrorMessage(err)
+            })
+        }
+        res.json({ ...req.order, payment_id: req.paypauliTransaction})
     })
 }
 
@@ -81,5 +132,7 @@ export default {
   getStatusValues,
   orderByID,
   listByUser,
-  read
+  read,
+    processPayment,
+    updateById,
 }
