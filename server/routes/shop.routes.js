@@ -12,12 +12,12 @@ router.route('/api/shop/:shopId')
   .get(shopCtrl.read)
 
 router.route('/api/shops/by/:userId')
-  .post(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.isSeller, shopCtrl.create)
-  .get(authCtrl.requireSignin, authCtrl.hasAuthorization, shopCtrl.listByOwner)
+  .post(authCtrl.requireSignin,userCtrl.userByAuthId, authCtrl.hasAuthorization, userCtrl.isSeller, shopCtrl.create)
+  .get(authCtrl.requireSignin,userCtrl.userByAuthId, authCtrl.hasAuthorization, shopCtrl.listByOwner)
 
 router.route('/api/shops/:shopId')
-  .put(authCtrl.requireSignin, shopCtrl.isOwner, shopCtrl.update)
-  .delete(authCtrl.requireSignin, shopCtrl.isOwner, shopCtrl.remove)
+  .put(authCtrl.requireSignin,userCtrl.userByAuthId, shopCtrl.isOwner, shopCtrl.update)
+  .delete(authCtrl.requireSignin,userCtrl.userByAuthId, shopCtrl.isOwner, shopCtrl.remove)
 
 router.route('/api/shops/logo/:shopId')
   .get(shopCtrl.photo, shopCtrl.defaultPhoto)

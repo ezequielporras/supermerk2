@@ -110,7 +110,7 @@ class EditShop extends Component {
           ? `/api/shops/logo/${this.state.id}?${new Date().getTime()}`
           : '/api/shops/defaultphoto'
     if (this.state.redirect) {
-      return (<Redirect to={'/seller/shops'}/>)
+      return (<Redirect to={auth.isAuthenticated().user.employee ? '/shops/all' : '/seller/shops'}/>)
     }
     const {classes} = this.props
     return (<div className={classes.root}>
