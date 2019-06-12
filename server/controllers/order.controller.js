@@ -21,16 +21,28 @@ const create = (req, res, next) => {
 }
 
 const processCredit = (card, req, total, res, next) => {
-    const url = `http://paypauli.herokuapp.com/api/txn/?tarjeta=${card.cardNumber.replace(/\s+/g, '')}&idEstablecimiento=${ESTABLISHMENT}&nroComprobante=${Math.floor(Math.random() * 999999)}&detalleTransaccion=Supermerk2 Order:${req.order._id}&importeTotal=${total}&cuotas=1&cvc=${card.cvc}`;
+    const url = 'http://paypauli.herokuapp.com/api/txn';
+
+    const body = {
+        tarjeta: card.cardNumber.replace(/\s+/g, ''),
+        idEstablecimiento: ESTABLISHMENT,
+        nroComprobante: Math.floor(Math.random() * 999999),
+        detalleTransaccion: `Supermerk2 Order:${req.order._id}`,
+        importeTotal: total,
+        cuotas: 1,
+        cvc: card.cvc,
+    }
+
     request({
         url: encodeURI(url),
-        method: "GET",
+        method: "POST",
         json: true,
+        body: body,
     }, (error, response, body) => {
         //update user
-        if (body.error) {
+        if (body.code > 300) {
             return res.status('400').json({
-                error: body.error_description
+                error: body.message
             })
         }
         req.paypauliTransaction = body.transaccion;
@@ -89,7 +101,7 @@ const updateById = (req, res) => {
                 error: errorHandler.getErrorMessage(err)
             })
         }
-        res.json({ ...req.order, payment_id: req.paypauliTransaction})
+        res.json(req.order)
     })
 }
 
