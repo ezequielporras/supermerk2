@@ -23,7 +23,8 @@ const create = (req, res, next) => {
  * Load user and append to req.
  */
 const userByID = (req, res, next, id) => {
-  User.findById(id).exec((err, user) => {
+    const userId = id || req.auth._id;
+  User.findById(userId).exec((err, user) => {
     if (err || !user)
       return res.status('400').json({
         error: "User not found"
@@ -32,6 +33,24 @@ const userByID = (req, res, next, id) => {
     next()
   })
 }
+
+/**
+ * Load user and append to req.
+ */
+const userByAuthId = (req, res, next) => {
+    const userId = req.auth._id;
+    User.findById(userId).exec((err, user) => {
+        if (err || !user)
+            return res.status('400').json({
+                error: "User not found"
+            })
+        req.logged = user
+        next()
+    })
+}
+
+
+
 
 const read = (req, res) => {
   req.profile.hashed_password = undefined
@@ -97,6 +116,7 @@ const createCharge = (req, res, next) => {
 export default {
   create,
   userByID,
+    userByAuthId,
   read,
   list,
   remove,

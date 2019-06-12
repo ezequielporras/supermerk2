@@ -48,7 +48,7 @@ const requireSignin = expressJwt({
 })
 
 const hasAuthorization = (req, res, next) => {
-  const authorized = req.profile && req.auth && (req.profile._id == req.auth._id) || req.body.employee !== undefined && req.body.employee;
+  const authorized = req.profile && req.auth && (req.profile._id == req.auth._id) || req.logged.employee !== undefined && req.logged.employee;
   if (!(authorized)) {
     return res.status('403').json({
       error: "Usuario no autorizado"

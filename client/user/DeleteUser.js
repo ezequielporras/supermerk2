@@ -24,7 +24,7 @@ class DeleteUser extends Component {
             if (data.error) {
                 console.log(data.error)
             } else {
-                auth.signout(() => console.log('deleted'))
+                !auth.isAuthenticated().user.employee && auth.signout(() => console.log('deleted'));
                 this.setState({redirect: true})
             }
         })
@@ -36,7 +36,7 @@ class DeleteUser extends Component {
     render() {
         const redirect = this.state.redirect
         if (redirect) {
-            return <Redirect to='/'/>
+            return <Redirect to={auth.isAuthenticated().user.employee ? '/users' : '/'}/>
         }
         return (<span>
       <IconButton aria-label="Delete" onClick={this.clickButton} color={this.props.color || 'secondary'}>

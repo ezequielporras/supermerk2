@@ -107,7 +107,7 @@ const update = (req, res, next) => {
 }
 
 const isOwner = (req, res, next) => {
-  const isOwner = req.shop && req.auth && (req.shop.owner._id == req.auth._id) || req.body.employee !== undefined && req.body.employee;
+  const isOwner = req.shop && req.auth && (req.shop.owner._id == req.auth._id) || req.logged.employee !== undefined && req.logged.employee;
   if(!isOwner){
     return res.status('403').json({
       error: "User is not authorized"

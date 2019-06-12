@@ -114,7 +114,7 @@ class EditProduct extends Component {
       <Card className={classes.card}>
         <CardContent>
           <Typography type="headline" component="h2" className={classes.title}>
-            Edit Product
+            Editar Producto
           </Typography><br/>
           <Avatar src={imageUrl} className={classes.bigAvatar}/><br/>
           <input accept="image/*" onChange={this.handleChange('image')} className={classes.input} id="icon-button-file" type="file" />
