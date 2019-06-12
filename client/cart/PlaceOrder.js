@@ -58,10 +58,14 @@ class PlaceOrder extends Component {
             cardNumber: this.state.cardNumber,
             cvc: this.state.cvc,
         }
+        const total = this.props.checkoutDetails.products && this.props.checkoutDetails.products.reduce((a, b) => {
+            return a + (b.quantity*b.product.price)
+        }, 0);
+
         const jwt = auth.isAuthenticated();
         create({userId: jwt.user._id}, {
             t: jwt.token
-        }, { ...this.props.checkoutDetails, payment_method: this.state.paymentMethod }, card ).then((data) => {
+        }, { ...this.props.checkoutDetails, payment_method: this.state.paymentMethod, amount: total }, card ).then((data) => {
             if (data.error) {
                 this.setState({error: data.error})
             } else {

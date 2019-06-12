@@ -2,25 +2,25 @@ import {Order, CartItem} from '../models/order.model'
 import _ from 'lodash'
 import errorHandler from './../helpers/dbErrorHandler'
 import request from 'request'
+
 const ESTABLISHMENT = 6;
 
 const create = (req, res, next) => {
-  req.body.order.user = req.profile
-
-  const order = new Order(req.body.order)
-  order.save((err, result) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    req.order = result;
-    next();
-    //res.status(200).json(result)
-  })
+    req.body.order.user = req.profile;
+    const order = new Order(req.body.order)
+    order.save((err, result) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler.getErrorMessage(err)
+            })
+        }
+        req.order = result;
+        next();
+        //res.status(200).json(result)
+    })
 }
 
-const processCredit = (card, req, total, res, next) => {
+const processCredit = (card, req, res, next) => {
     const url = 'http://paypauli.herokuapp.com/api/txn';
 
     const body = {
@@ -28,7 +28,7 @@ const processCredit = (card, req, total, res, next) => {
         idEstablecimiento: ESTABLISHMENT,
         nroComprobante: Math.floor(Math.random() * 999999),
         detalleTransaccion: `Supermerk2 Order:${req.order._id}`,
-        importeTotal: total,
+        importeTotal: req.order.amount,
         cuotas: 1,
         cvc: card.cvc,
     }
@@ -51,51 +51,54 @@ const processCredit = (card, req, total, res, next) => {
 }
 
 const processPayment = (req, res, next) => {
-  const card = req.body.card;
-  const total = req.body.order.products.reduce((a, b) => {
-        return a + (b.quantity*b.product.price)
-    }, 0);
-  if (req.order.payment_method === 'Credito') {
-    processCredit(card, req, total, res, next);
-  } else {
+    const card = req.body.card;
 
-  }
+    if (req.order.payment_method === 'Credito') {
+        processCredit(card, req, res, next);
+    } else if (req.order.payment_method === 'Efectivo') {
+        next()
+    } else {
+        //TODO INTEGRAR CON DEBITO API DE BANCO
+    }
 }
-
 
 
 const listByShop = (req, res) => {
-  Order.find({"products.shop": req.shop._id})
-  .populate({path: 'products.product', select: '_id name price'})
-  .sort('-created')
-  .exec((err, orders) => {
-    if (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
-    res.json(orders)
-  })
+    Order.find({"products.shop": req.shop._id})
+        .populate({path: 'products.product', select: '_id name price'})
+        .sort('-created')
+        .exec((err, orders) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler.getErrorMessage(err)
+                })
+            }
+            res.json(orders)
+        })
 }
 
 const update = (req, res) => {
-  Order.update({'products._id':req.body.cartItemId}, {'$set': {
-        'products.$.status': req.body.status
-    }}, (err, order) => {
-      if (err) {
-        return res.status(400).send({
-          error: errorHandler.getErrorMessage(err)
-        })
-      }
-      res.json(order)
+    Order.update({'products._id': req.body.cartItemId}, {
+        '$set': {
+            'products.$.status': req.body.status
+        }
+    }, (err, order) => {
+        if (err) {
+            return res.status(400).send({
+                error: errorHandler.getErrorMessage(err)
+            })
+        }
+        res.json(order)
     })
 }
 
 const updateById = (req, res) => {
-    Order.update({'_id':req.order._id}, {'$set': {
+    Order.update({'_id': req.order._id}, {
+        '$set': {
             'payment_id': req.paypauliTransaction,
             'payment_status': 'Pagado'
-        }}, (err, order) => {
+        }
+    }, (err, order) => {
         if (err) {
             return res.status(400).send({
                 error: errorHandler.getErrorMessage(err)
@@ -106,45 +109,68 @@ const updateById = (req, res) => {
 }
 
 const getStatusValues = (req, res) => {
-  res.json(CartItem.schema.path('status').enumValues)
+    res.json(CartItem.schema.path('status').enumValues)
 }
 
 const orderByID = (req, res, next, id) => {
-  Order.findById(id).populate('products.product', 'name price').populate('products.shop', 'name').exec((err, order) => {
-    if (err || !order)
-      return res.status('400').json({
-        error: "Order not found"
-      })
-    req.order = order
-    next()
-  })
+    Order.findById(id).populate('products.product', 'name price').populate('products.shop', 'name').exec((err, order) => {
+        if (err || !order)
+            return res.status('400').json({
+                error: "Order not found"
+            })
+        req.order = order
+        next()
+    })
 }
 
 const listByUser = (req, res) => {
-  Order.find({ "user": req.profile._id })
+    Order.find({"user": req.profile._id})
         .sort('-created')
         .exec((err, orders) => {
             if (err) {
-              return res.status(400).json({
-                error: errorHandler.getErrorMessage(err)
-              })
+                return res.status(400).json({
+                    error: errorHandler.getErrorMessage(err)
+                })
             }
             res.json(orders)
         })
 }
 
 const read = (req, res) => {
-  return res.json(req.order)
+    return res.json(req.order)
 }
 
+const listAmounts = (req, res) => {
+    Order.aggregate([
+        {
+            $group: {
+                _id: { month: { $month: "$date" }, payment_method: "$payment_method", payment_status: "$payment_status"  },
+                totalPrice: {
+                    $sum: "$amount"
+                }
+            }
+        }
+    ])
+        .exec((err, metrics) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler.getErrorMessage(err)
+                })
+            }
+            res.json(metrics)
+        })
+}
+
+
 export default {
-  create,
-  listByShop,
-  update,
-  getStatusValues,
-  orderByID,
-  listByUser,
-  read,
+    create,
+    listByShop,
+    update,
+    getStatusValues,
+    orderByID,
+    listByUser,
+    read,
     processPayment,
     updateById,
+    listAmounts,
 }

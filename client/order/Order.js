@@ -176,7 +176,7 @@ class Order extends Component {
                 <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">{this.state.order.delivery_address.city}, {this.state.order.delivery_address.state} {this.state.order.delivery_address.zipcode}</Typography>
                 <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">{this.state.order.delivery_address.country}</Typography><br/>
                   { this.state.order.payment_method && <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">Medio de pago: {this.state.order.payment_method}</Typography>}<br/>
-                <Typography type="subheading" component="h3" className={classes.thanks} color="primary">¡Todo listo! <br/># Transacción: {this.state.order.payment_id}</Typography>
+                  {this.state.order.payment_id &&<Typography type="subheading" component="h3" className={classes.thanks} color="primary">¡Todo listo! <br/># Transacción: {this.state.order.payment_id}</Typography>}
               </Card>
             </Grid>
         </Grid>

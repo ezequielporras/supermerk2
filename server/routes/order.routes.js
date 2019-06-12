@@ -31,6 +31,11 @@ router.route('/api/order/status/:shopId')
 router.route('/api/order/:orderId')
   .get(orderCtrl.read)
 
+router.route('/api/reports')
+    .get(orderCtrl.listAmounts)
+
+
+
 router.param('userId', userCtrl.userByID)
 router.param('shopId', shopCtrl.shopByID)
 router.param('productId', productCtrl.productByID)
