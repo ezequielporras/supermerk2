@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema({
   },
   salt: String,
     cbu: String,
+    cuil: String,
   updated: Date,
   created: {
     type: Date,

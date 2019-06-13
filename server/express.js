@@ -40,7 +40,7 @@ app.use(cookieParser())
 app.use(compress())
 // secure apps by setting various HTTP headers
 app.use(helmet())
-// enable CORS - Cross Origin Resource Sharing
+// enable CORS - Cross Origin Resource Shagsring
 app.use(cors())
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
