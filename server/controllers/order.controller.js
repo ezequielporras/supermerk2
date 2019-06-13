@@ -46,7 +46,7 @@ const processCredit = (card, req, res, next) => {
                 error: body.message
             })
         }
-        //req.paypauliTransaction = body.transaccion;
+        req.paypauliTransaction = body.transaccion;
         next()
     })
 }
