@@ -71,11 +71,11 @@ class Reports extends Component {
             } else {
                 // const payeds = data.filter(item => item._id.payment_status = 'Pagado');
                 const byStatus = groupBy(data, '_id.payment_status');
-                const totalPayed = byStatus.Pagado.reduce((a, b) => {
+                const totalPayed = 'Pagado' in byStatus && byStatus.Pagado.reduce((a, b) => {
                     return a + (b.totalPrice)
                 }, 0);
 
-                const totalPending = byStatus.Pendiente.reduce((a, b) => {
+                const totalPending = 'Pendiente' in byStatus && byStatus.Pendiente.reduce((a, b) => {
                     return a + (b.totalPrice)
                 }, 0);
 
