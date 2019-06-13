@@ -9,7 +9,7 @@ import Switch from 'material-ui/Switch'
 import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
 import auth from './../auth/auth-helper'
-import {read, update, createBankUserAccount, getBankAccount} from './api-user.js'
+import {read, update, createBankUserAccount, getBankAccount, registerPresentism} from './api-user.js'
 import {Redirect} from 'react-router-dom'
 
 const styles = theme => ({
@@ -53,6 +53,7 @@ class EditProfile extends Component {
             employee: false,
             cuil: '',
             cbu: '',
+            salary: '',
             redirectToProfile: false,
             error: ''
         }
@@ -67,19 +68,34 @@ class EditProfile extends Component {
             if (data.error) {
                 this.setState({error: data.error})
             } else {
-                this.setState({name: data.name, email: data.email, seller: data.seller, employee: data.employee, cbu: data.cbu, cuil: data.cuil})
+                this.setState({
+                    name: data.name,
+                    email: data.email,
+                    seller: data.seller,
+                    employee: data.employee,
+                    cbu: data.cbu,
+                    cuil: data.cuil,
+                    salary: data.salary
+                })
             }
         })
     }
     clickSubmit = () => {
         const user = auth.isAuthenticated().user;
-        this.state.cuil && !this.state.cbu ? createBankUserAccount({ cuil: this.state.cuil, name: this.state.name, email: this.state.email }).then(data => {
-            getBankAccount({cuil: this.state.cuil}).then(data => {
-                const account = data.filter(item => item.tipoCuenta === 'CAJA_AHORRO')[0];
-                this.setState({ cbu: account.cbu }, this.editProfile)
+        this.state.cuil && !this.state.cbu ? createBankUserAccount({
+                cuil: this.state.cuil,
+                name: this.state.name,
+                email: this.state.email
+            }).then(data => {
+                registerPresentism({cuil: this.state.cuil}).then(data => {
+                    console.log('Register employee success on presentism');
+                })
+                getBankAccount({cuil: this.state.cuil}).then(data => {
+                    const account = data.filter(item => item.tipoCuenta === 'CAJA_AHORRO')[0];
+                    this.setState({cbu: account.cbu}, this.editProfile)
+                })
             })
-        })
-        : this.editProfile();
+            : this.editProfile();
     }
 
     editProfile = () => {
@@ -92,6 +108,7 @@ class EditProfile extends Component {
             employee: this.state.employee,
             cbu: this.state.cbu,
             cuil: this.state.cuil,
+            salary: this.state.salary,
         }
         update({
             userId: this.match.params.userId
@@ -108,21 +125,22 @@ class EditProfile extends Component {
         })
     }
 
-    renderEmployee = () =>  {
+    renderEmployee = () => {
         const {classes} = this.props
-        return auth.isAuthenticated().user.employee && (<span><Typography type="subheading" component="h4" className={classes.subheading}>
+        return auth.isAuthenticated().user.employee && (
+            <span><Typography type="subheading" component="h4" className={classes.subheading}>
             Empleado
         </Typography>
         <FormControlLabel
-        control={
-        <Switch classes={{
-            checked: classes.checked,
-            bar: classes.bar,
-        }}
-                checked={this.state.employee}
-                onChange={this.handleCheckEmployee}
-        />}
-        label={this.state.employee ? 'Activo' : 'Inactivo'}
+            control={
+                <Switch classes={{
+                    checked: classes.checked,
+                    bar: classes.bar,
+                }}
+                        checked={this.state.employee}
+                        onChange={this.handleCheckEmployee}
+                />}
+            label={this.state.employee ? 'Activo' : 'Inactivo'}
         /></span>)
     }
 
@@ -156,9 +174,14 @@ class EditProfile extends Component {
                     <TextField id="password" type="password" label="Password" className={classes.textField}
                                value={this.state.password} onChange={this.handleChange('password')} margin="normal"/>
                     {this.state.employee && <TextField id="cuil" type="text" label="CUIL" className={classes.textField}
-                                                       value={this.state.cuil} onChange={this.handleChange('cuil')} margin="normal"/>}
-                    {this.state.employee && <TextField disabled={true} id="cbu" type="text" label="CBU" className={classes.textField}
+                                                       value={this.state.cuil} onChange={this.handleChange('cuil')}
+                                                       margin="normal"/>}
+                    {this.state.employee &&
+                    <TextField disabled={true} id="cbu" type="text" label="CBU" className={classes.textField}
                                value={this.state.cbu} onChange={this.handleChange('cbu')} margin="normal"/>}
+                    {this.state.employee &&
+                    <TextField disabled={!this.isSuperUser()} id="salary" type="text" label="Salario" className={classes.textField}
+                               value={this.state.salary} onChange={this.handleChange('salary')} margin="normal"/>}
                     <Typography type="subheading" component="h4" className={classes.subheading}>
                         Cuenta proveedor
                     </Typography>
@@ -187,6 +210,10 @@ class EditProfile extends Component {
                 </CardActions>
             </Card>
         )
+    }
+
+    isSuperUser() {
+        return auth.isAuthenticated().user.roles !== undefined && auth.isAuthenticated().user.roles.includes('super');
     }
 }
 

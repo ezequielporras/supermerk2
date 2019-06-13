@@ -90,7 +90,7 @@ class ShopOrders extends Component {
                 <ProductOrderEdit shopId={this.match.params.shopId} order={order} orderIndex={index} updateOrders={this.updateOrders}/>
                 <div className={classes.customerDetails}>
                   <Typography type="subheading" component="h3" className={classes.subheading}>
-                    Eviado a:
+                    Enviado a:
                   </Typography>
                   <Typography type="subheading" component="h3" color="primary"><strong>{order.customer_name}</strong> ({order.customer_email})</Typography>
                   <Typography type="subheading" component="h3" color="primary">{order.delivery_address.street}</Typography>

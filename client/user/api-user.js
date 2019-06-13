@@ -1,3 +1,5 @@
+const CUIT = 30278205627;
+
 const create = (user) => {
     return fetch('/api/users/', {
         method: 'POST',
@@ -66,11 +68,11 @@ const createBankUserAccount = (params) => {
         "contrasena": "1234",
         "nombre": params.name,
         "apellido": params.email,
-        "idRol": {"id": 2},
-        "idProducto": {"id": 4}
+        "idRol": {"id": 1},
+        "idProducto": {"id": 5}
     }
     return fetch('https://bank-back.herokuapp.com/api/v1/usuario', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -93,6 +95,24 @@ const getBankAccount = (params) => {
     }).catch((err) => console.log(err))
 }
 
+const registerPresentism = (params) => {
+    const body = {
+        "cuil": +params.cuil,
+        "cuit": CUIT,
+        "accion": "A",
+    }
+    return fetch('https://presentismo-integrado.herokuapp.com/NovedadEmpleado', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+    }).then((response) => {
+        return response.json()
+    }).catch((err) => console.log(err))
+}
+
 
 export {
     create,
@@ -102,4 +122,5 @@ export {
     remove,
     createBankUserAccount,
     getBankAccount,
+    registerPresentism,
 }

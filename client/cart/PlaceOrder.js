@@ -57,6 +57,7 @@ class PlaceOrder extends Component {
         const card = {
             cardNumber: this.state.cardNumber,
             cvc: this.state.cvc,
+            expiry: this.state.expiry
         }
         const total = this.props.checkoutDetails.products && this.props.checkoutDetails.products.reduce((a, b) => {
             return a + (b.quantity*b.product.price)

@@ -4,6 +4,7 @@ import errorHandler from './../helpers/dbErrorHandler'
 import request from 'request'
 
 const ESTABLISHMENT = 6;
+const ESTABLISHMENTCBU = "1234567891011316209650";
 
 const create = (req, res, next) => {
     req.body.order.user = req.profile;
@@ -45,7 +46,7 @@ const processCredit = (card, req, res, next) => {
                 error: body.message
             })
         }
-        req.paypauliTransaction = body.transaccion;
+        //req.paypauliTransaction = body.transaccion;
         next()
     })
 }
@@ -58,8 +59,41 @@ const processPayment = (req, res, next) => {
     } else if (req.order.payment_method === 'Efectivo') {
         next()
     } else {
-        //TODO INTEGRAR CON DEBITO API DE BANCO
+        processDebit(card, req, res, next);
     }
+}
+
+
+const processDebit = (card, req, res, next) => {
+    const url = 'https://bank-back.herokuapp.com/api/v1/public/debitar';
+    const splittedExpiry = card.expiry.replace(/\s+/g, '').split("/");
+    const month = +splittedExpiry[0]-1;
+    const year = `20${splittedExpiry[1]}`;
+
+    const body = {
+        numeroTarjeta: card.cardNumber.replace(/\s+/g, ''),
+        cbuEstablecimiento: ESTABLISHMENTCBU,
+        fechaVencimiento: new Date(year, month.toString()),
+        descripcion: `Supermerk2 Order:${req.order._id}`,
+        monto: req.order.amount,
+        codigoSeguridad: card.cvc,
+    }
+
+    request({
+        url: encodeURI(url),
+        method: "POST",
+        json: true,
+        body: body,
+    }, (error, response, body) => {
+        //update user
+        if (body && body.status > 300) {
+            return res.status('400').json({
+                error: body.message
+            })
+        }
+        //req.paypauliTransaction = body.transaccion;
+        next()
+    })
 }
 
 

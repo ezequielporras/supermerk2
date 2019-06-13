@@ -2,70 +2,136 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
-import List, {ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText} from 'material-ui/List'
-import Avatar from 'material-ui/Avatar'
-import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
-import ArrowForward from 'material-ui-icons/ArrowForward'
-import Money from 'material-ui-icons/AttachMoney'
-import {Link} from 'react-router-dom'
 import {list} from './api-reports.js'
+import Table from 'material-ui/Table/Table';
+import TableBody from 'material-ui/Table/TableBody';
+import TableCell from 'material-ui/Table/TableCell';
+import TableHead from 'material-ui/Table/TableHead';
+import TableRow from 'material-ui/Table/TableRow';
+import sortBy from 'lodash.sortby';
+import groupBy from 'lodash.groupby';
+import Button from 'material-ui/Button';
+
+const CustomTableCell = withStyles(theme => ({
+    head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    body: {
+        fontSize: 14,
+    },
+}))(TableCell);
 
 const styles = theme => ({
-  root: theme.mixins.gutters({
-    padding: theme.spacing.unit,
-    margin: theme.spacing.unit * 5
-  }),
-  title: {
-    margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
-    color: theme.palette.openTitle
-  }
-})
+    root: {
+        display: 'flex',
+        overflowX: 'auto',
+        flexWrap: 'wrap',
+        marginRight: theme.spacing.unit * 3,
+        marginLeft: theme.spacing.unit * 3,
+        marginTop: theme.spacing.unit * 3
+    },
+    table: {
+        width: '50%',
+        margin: '24px'
+    },
+    row: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.background.default,
+        },
+    },
+    title: {
+        margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
+        color: theme.palette.openTitle
+    },
+    button: {
+        //margin: theme.spacing.unit,
+        padding: '25px',
+        fontSize: '24px',
+    },
+    totals: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        margin: '0 auto',
+    },
+});
+
 
 class Reports extends Component {
-  state = {
-      items: []
-  }
+    state = {
+        items: []
+    }
 
-  componentDidMount() {
-    list().then((data) => {
-      if (data.error) {
-        console.log(data.error)
-      } else {
+    componentDidMount() {
+        list().then((data) => {
+            if (data.error) {
+                console.log(data.error)
+            } else {
+                // const payeds = data.filter(item => item._id.payment_status = 'Pagado');
+                const byStatus = groupBy(data, '_id.payment_status');
+                const totalPayed = byStatus.Pagado.reduce((a, b) => {
+                    return a + (b.totalPrice)
+                }, 0);
 
-        this.setState({items: data})
-      }
-    })
-  }
+                const totalPending = byStatus.Pendiente.reduce((a, b) => {
+                    return a + (b.totalPrice)
+                }, 0);
 
-  render() {
-    const {classes} = this.props
-    return (
-      <Paper className={classes.root} elevation={4}>
-        <Typography type="title" className={classes.title}>
-          Patrimonio por metodo y estado de pago.
-        </Typography>
-        <List dense>
-         {this.state.items.map((item, i) => {
-          return <ListItem>
-                      <ListItemAvatar>
-                        <Avatar>
-                          <Money/>
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={item.totalPrice}/>
-                      <ListItemText primary={`${item._id.payment_method} - ${item._id.payment_status}`}/>
-                    </ListItem>
-               })
-             }
-        </List>
-      </Paper>
-    )
-  }
+                this.setState({
+                    items: sortBy(data, [function (o) {
+                        return o._id.payment_status;
+                    }]),
+                    totalPayed,
+                    totalPending
+                })
+            }
+        })
+    }
+
+    render() {
+        const {classes} = this.props
+        return (
+            <Paper className={classes.root}>
+                <Table className={classes.table}>
+                    <TableHead>
+                        <TableRow>
+                            <CustomTableCell>Metodo de pago</CustomTableCell>
+                            <CustomTableCell>Estado</CustomTableCell>
+                            <CustomTableCell numeric>Total</CustomTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {this.state.items.map(n => {
+                            return (
+                                <TableRow className={classes.row} key={n.id}>
+                                    <CustomTableCell component="th" scope="row">
+                                        {n._id.payment_method}
+                                    </CustomTableCell>
+                                    <CustomTableCell>{n._id.payment_status}</CustomTableCell>
+                                    <CustomTableCell numeric>$ {n.totalPrice}</CustomTableCell>
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+                <div className={classes.totals}>
+                <Button variant="raised" color="primary" className={classes.button} style={{ backgroundColor: '#4caf50' }}>
+                   Cobrado $ {this.state.totalPayed}
+                </Button>
+                <Button variant="raised" color="primary" className={classes.button} style={{ backgroundColor: '#FFC107' }}>
+                    Por cobrar $ {this.state.totalPending}
+                </Button>
+                </div>
+            </Paper>
+        );
+    }
 }
 
 Reports.propTypes = {
-  classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(Reports)
+

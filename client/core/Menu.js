@@ -63,7 +63,7 @@ const Menu = withRouter(({history}) => (
         </span>)
       }
                 {auth.isAuthenticated().user && auth.isAuthenticated().user.employee && <Link to="/reports">
-                    <Button style={isActive(history, "/reports")}>Reportes</Button>
+                    <Button style={isActive(history, "/reports")}>Facturación</Button>
                 </Link>
                 }
                 {auth.isAuthenticated().user && auth.isAuthenticated().user.employee && <Link to="/shops/all">
