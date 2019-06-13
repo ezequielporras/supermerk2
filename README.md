@@ -30,7 +30,10 @@ Chrome, IE
 - [Mapa de arquitectura](https://drive.google.com/open?id=1u7gq8nTfRZhlyn6VlL4znGXYUbemZaW1
 ).
 
+## Documentación de API´s externas
 
+- [Tarjeta de crédito - PAYPAULI](http://cor.to/PayPauliAPI)
+- [Banco](https://bank-back.herokuapp.com/swagger-ui.html#/)
 
 
 ## Uso
