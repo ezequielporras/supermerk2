@@ -179,9 +179,9 @@ class EditProfile extends Component {
                     {this.state.employee &&
                     <TextField disabled={true} id="cbu" type="text" label="CBU" className={classes.textField}
                                value={this.state.cbu} onChange={this.handleChange('cbu')} margin="normal"/>}
-                    {this.state.employee &&
-                    <TextField disabled={!this.isSuperUser()} id="salary" type="text" label="Salario" className={classes.textField}
-                               value={this.state.salary} onChange={this.handleChange('salary')} margin="normal"/>}
+                    {/*{this.state.employee &&*/}
+                    {/*<TextField disabled={!this.isSuperUser()} id="salary" type="text" label="Salario" className={classes.textField}*/}
+                               {/*value={this.state.salary} onChange={this.handleChange('salary')} margin="normal"/>}*/}
                     <Typography type="subheading" component="h4" className={classes.subheading}>
                         Cuenta proveedor
                     </Typography>

@@ -8,6 +8,9 @@ router.route('/api/users')
   .get(userCtrl.list)
   .post(userCtrl.create)
 
+router.route('/api/employee')
+    .get(userCtrl.listEmployee)
+
 router.route('/api/users/:userId')
   .get(authCtrl.requireSignin, userCtrl.read)
   .put(authCtrl.requireSignin,userCtrl.userByAuthId, authCtrl.hasAuthorization, userCtrl.update)

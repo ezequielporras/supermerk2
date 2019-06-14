@@ -156,7 +156,7 @@ class PlaceOrder extends Component {
             {this.state.error}
         </Typography>)
         }
-                    <Button color="secondary" variant="raised" onClick={this.placeOrder}>Comprar</Button>
+                    <Button color="secondary" variant="raised" onClick={this.placeOrder} style={{ float: 'right' }}>Comprar</Button>
       </div>
     </span>)
     }

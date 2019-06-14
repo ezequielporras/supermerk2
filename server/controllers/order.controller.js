@@ -86,7 +86,7 @@ const processDebit = (card, req, res, next) => {
         body: body,
     }, (error, response, body) => {
         //update user
-        if (body && body.status > 300) {
+        if (response && response.statusCode > 300) {
             return res.status('400').json({
                 error: body.message
             })
