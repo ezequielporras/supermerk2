@@ -20,10 +20,10 @@ const getEmployeeUsers = () => {
 
 const getEmployeeHours = (cuil) => {
     const currentDate = new Date();
-    const sinceMonth = currentDate.getMonth() - 1;
-    const sinceDate = `${currentDate.getFullYear().toString()}-${sinceMonth.toString()}-${currentDate.getDate().toString()}`;
-    const untilDate = `${currentDate.getFullYear().toString()}-${currentDate.getMonth().toString()}-${currentDate.getDate().toString()}`;
-    return fetch('https://presentismo-integrado.herokuapp.com/informarpresentismo', {
+    const untilMonth = currentDate.getMonth() + 1;
+    const sinceDate = `${currentDate.getFullYear().toString()}-0${currentDate.getMonth().toString()}-${currentDate.getDate().toString()}`;
+    const untilDate = `${currentDate.getFullYear().toString()}-0${untilMonth.toString()}-${currentDate.getDate().toString()}`;
+    return fetch(`https://presentismo-integrado.herokuapp.com/informarpresentismo?cuil=${cuil}&fechaInicio=${sinceDate}&fechaFin=${untilDate}`, {
         method: 'GET',
         // body: {
         //     cuil: cuil,
@@ -50,7 +50,7 @@ const processPayment = (body) => {
 
 
 const buildAmount = (opt) => {
-    const finalHours = opt.hours - (opt.aus * 8);
+    const finalHours = opt.hours;
     return finalHours * HOURVALUE;
 }
 
@@ -61,15 +61,15 @@ const getPresentismByEmployee = (cb) => {
         getEmployeeUsers().then((data) => {
             const qtyUsers = data.length;
             data.forEach((item, index) => {
-                const employee = getEmployeeHours(); //item.cuil
+                const employee = getEmployeeHours(item.cuil);
                 employee.then(employeeData => {
                     employeeData && employeeInfo.push({
                         cbuDestino: item.cbu,
                         fechaDePago: new Date(),
                         descripcion: `Pago de haberes ${item.name}`,
-                        monto: buildAmount({hours: employeeData.horasTrabajadas, aus: employeeData.ausencias})
+                        monto: employeeData.horasTrabajadas * HOURVALUE
                     })
-                    if (index === qtyUsers - 1) resolve();
+                    if (employeeInfo.length === qtyUsers) resolve();
                 })
             })
         })
@@ -89,15 +89,15 @@ const getPresentism = (cb) => {
         getEmployeeUsers().then((data) => {
             const qtyUsers = data.length;
             data.forEach((item, index) => {
-                const employee = getEmployeeHours(); //item.cuil
+                const employee = getEmployeeHours(item.cuil);
                 employee.then(employeeData => {
                     employeeData && employeeInfo.push({
                         name: item.name,
                         hours: employeeData.horasTrabajadas,
                         aus: employeeData.ausencias,
-                        amount: buildAmount({hours: employeeData.horasTrabajadas, aus: employeeData.ausencias}),
+                        amount: employeeData.horasTrabajadas * HOURVALUE
                     })
-                    if (index === qtyUsers - 1) resolve();
+                    if (employeeInfo.length === qtyUsers) resolve();
                 })
             })
         })
