@@ -30,7 +30,7 @@ const processCredit = (card, req, res, next) => {
         nroComprobante: Math.floor(Math.random() * 999999),
         detalleTransaccion: `Supermerk2 Order:${req.order._id}`,
         importeTotal: req.order.amount,
-        cuotas: 1,
+        cuotas: card.cuotes,
         cvc: card.cvc,
     }
 

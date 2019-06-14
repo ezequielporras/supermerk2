@@ -7,7 +7,6 @@ const config = {
     name: "server",
     entry: [ path.join(CURRENT_WORKING_DIR , './server/server.js') ],
     target: "node",
-    devtool: 'cheap-module-eval-source-map',
     output: {
         path: path.join(CURRENT_WORKING_DIR , '/dist/'),
         filename: "server.generated.js",

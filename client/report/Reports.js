@@ -175,10 +175,10 @@ class Reports extends Component {
                                 style={{backgroundColor: '#4caf50'}}>
                             Cobrado $ {this.state.totalPayed}
                         </Button>
-                        <Button variant="raised" color="primary" className={classes.button}
+                        {this.state.totalPending && <Button variant="raised" color="primary" className={classes.button}
                                 style={{backgroundColor: '#FFC107'}}>
                             Por cobrar $ {this.state.totalPending}
-                        </Button>
+                        </Button>}
                     </div>
                 </Paper>
                 <Paper className={classes.root}>

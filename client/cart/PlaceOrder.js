@@ -45,28 +45,35 @@ class PlaceOrder extends Component {
         expiry: null,
         cvc: null,
         showCard: false,
+        cuotes: '1',
         paymentMethod: 'Efectivo',
         paymentMethods: [
             'Credito',
             'Debito',
             'Efectivo'
-        ]
+        ],
+        couteTypes: ['1','3', '6', '12']
     }
 
     placeOrder = () => {
         const card = {
             cardNumber: this.state.cardNumber,
             cvc: this.state.cvc,
-            expiry: this.state.expiry
+            expiry: this.state.expiry,
+            cuotes: this.state.cuotes || 1,
         }
         const total = this.props.checkoutDetails.products && this.props.checkoutDetails.products.reduce((a, b) => {
-            return a + (b.quantity*b.product.price)
+            return a + (b.quantity * b.product.price)
         }, 0);
 
         const jwt = auth.isAuthenticated();
         create({userId: jwt.user._id}, {
             t: jwt.token
-        }, { ...this.props.checkoutDetails, payment_method: this.state.paymentMethod, amount: total }, card ).then((data) => {
+        }, {
+            ...this.props.checkoutDetails,
+            payment_method: this.state.paymentMethod,
+            amount: total
+        }, card).then((data) => {
             if (data.error) {
                 this.setState({error: data.error})
             } else {
@@ -89,12 +96,15 @@ class PlaceOrder extends Component {
         this.setState({cvc: e.target.value})
     }
 
+    handleCuoteChange = (e) => {
+        this.setState({cuotes: e.target.value})
+    }
 
     handlePaymentChange = event => {
         if (event.target.value === 'Credito' || event.target.value === 'Debito') {
-            this.setState({showCard: true, paymentMethod: event.target.value })
+            this.setState({showCard: true, paymentMethod: event.target.value})
         } else {
-            this.setState({showCard: false, paymentMethod: event.target.value })
+            this.setState({showCard: false, paymentMethod: event.target.value})
         }
     }
 
@@ -128,6 +138,30 @@ class PlaceOrder extends Component {
             </MenuItem>
         ))}
         </TextField>
+                {this.state.paymentMethod === 'Credito' &&
+                    <span>
+                <Typography type="subheading" component="h3" className={classes.subheading}>
+                  Cuotas
+                 </Typography>
+                <TextField
+                    id="select-cuotes"
+                    select
+                    value={this.state.cuotes}
+                    className={classes.textField}
+                    onChange={this.handleCuoteChange}
+                    SelectProps={{
+                        MenuProps: {
+                            className: classes.menu,
+                        },
+                    }}
+                    margin="normal"
+                >
+                        {this.state.couteTypes.map(option => (
+                            <MenuItem key={option} value={option}>
+                                {option}
+                            </MenuItem>
+                        ))}
+                </TextField></span>}
                 {this.state.showCard && <CreditCardInput
                     cardNumberInputProps={{value: this.state.cardNumber, onChange: this.handleCardNumberChange}}
                     cardExpiryInputProps={{value: this.state.expiry, onChange: this.handleCardExpiryChange}}
@@ -156,7 +190,8 @@ class PlaceOrder extends Component {
             {this.state.error}
         </Typography>)
         }
-                    <Button color="secondary" variant="raised" onClick={this.placeOrder} style={{ float: 'right' }}>Comprar</Button>
+                    <Button color="secondary" variant="raised" onClick={this.placeOrder}
+                            style={{float: 'right'}}>Comprar</Button>
       </div>
     </span>)
     }
