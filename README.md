@@ -65,7 +65,7 @@ Porras, Ezequiel
 Russo, Christian
 Souto, Alan
 ```
-![capi_bailarin](https://media.giphy.com/media/mDN01MIRhJnQjMQTUg/giphy.gif)
+<img src="https://media.giphy.com/media/LMbPXcBRjiv6znPo6m/giphy.gif" width="200" height="300">  <img src="https://media.giphy.com/media/el7TaEmdWWfiNpZER3/giphy.gif" width="200" height="300">  <img src="https://media.giphy.com/media/Ifh0A4V4HZooqVVe9b/giphy.gif" width="200" height="300">
 
 
 ## Gracias!
