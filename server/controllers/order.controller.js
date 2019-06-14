@@ -41,9 +41,9 @@ const processCredit = (card, req, res, next) => {
         body: body,
     }, (error, response, body) => {
         //update user
-        if (body.code > 300) {
+        if (body.statusCode > 300) {
             return res.status('400').json({
-                error: body.message
+                error: body && body.message || "Ocurrio un error al procesar tu pago, reintenta mas tarde."
             })
         }
         req.paypauliTransaction = body.transaccion;
@@ -55,7 +55,7 @@ const processPayment = (req, res, next) => {
     const card = req.body.card;
 
     if (req.order.payment_method === 'Credito') {
-        processCredit(card, req, res, next);
+            processCredit(card, req, res, next);
     } else if (req.order.payment_method === 'Efectivo') {
         next()
     } else {
