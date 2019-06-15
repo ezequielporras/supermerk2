@@ -63,6 +63,7 @@ Password: adminadmin
 ```
 ## Reportes
 Luego de ingresar ir a "ADMINISTRACIÓN" en el menu.
+
 <img width="1417" alt="Screen Shot 2019-06-15 at 10 23 14" src="https://user-images.githubusercontent.com/14336357/59551992-e77a7600-8f57-11e9-987a-739a6d1a49cd.png">
 
 
