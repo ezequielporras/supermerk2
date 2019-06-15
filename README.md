@@ -65,7 +65,7 @@ Porras, Ezequiel
 Russo, Christian
 Souto, Alan
 ```
-<img src="https://media.giphy.com/media/LMbPXcBRjiv6znPo6m/giphy.gif" width="200" height="300">  <img src="https://media.giphy.com/media/el7TaEmdWWfiNpZER3/giphy.gif" width="200" height="300">  <img src="https://media.giphy.com/media/Ifh0A4V4HZooqVVe9b/giphy.gif" width="200" height="300">
+<img src="https://media.giphy.com/media/LMbPXcBRjiv6znPo6m/giphy.gif" width="200" height="300">  <img src="https://media.giphy.com/media/el7TaEmdWWfiNpZER3/giphy.gif" width="200" height="300">  <img src="https://media.giphy.com/media/Ifh0A4V4HZooqVVe9b/giphy.gif" width="200" height="300">  <img src="https://media.giphy.com/media/VFBBbf512RHNj5u3IB/giphy.gif" width="200" height="300">
 
 
 ## Gracias!
