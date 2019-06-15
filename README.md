@@ -1,16 +1,6 @@
 # SUPERMERK2
 [DEMO](https://supermerk2.herokuapp.com)
 
-## Usuario root
-```
-Usuario: admin@supermerk2.com
-Password: adminadmin 
-```
-## Reportes
-Luego de ingresar ir a "ADMINISTRACIÓN" en el menu.
-<img width="1417" alt="Screen Shot 2019-06-15 at 10 23 14" src="https://user-images.githubusercontent.com/14336357/59551992-e77a7600-8f57-11e9-987a-739a6d1a49cd.png">
-
-
 
 TPO Integración de Aplicaciones - PINAMAR . Grupo Supermercado
 
@@ -66,6 +56,15 @@ npm install
 npm run start
 ```
 
+## Usuario root
+```
+Usuario: admin@supermerk2.com
+Password: adminadmin 
+```
+## Reportes
+Luego de ingresar ir a "ADMINISTRACIÓN" en el menu.
+<img width="1417" alt="Screen Shot 2019-06-15 at 10 23 14" src="https://user-images.githubusercontent.com/14336357/59551992-e77a7600-8f57-11e9-987a-739a6d1a49cd.png">
+
 
 
 ## Agradecimiento
@@ -77,7 +76,7 @@ Porras, Ezequiel
 Russo, Christian
 Souto, Alan
 ```
-<img src="https://media.giphy.com/media/LMbPXcBRjiv6znPo6m/giphy.gif" width="200" height="300">  <img src="https://media.giphy.com/media/el7TaEmdWWfiNpZER3/giphy.gif" width="200" height="300">  <img src="https://media.giphy.com/media/Ifh0A4V4HZooqVVe9b/giphy.gif" width="200" height="300">  <img src="https://media.giphy.com/media/VFBBbf512RHNj5u3IB/giphy.gif" width="200" height="300">
+
 
 
 ## Gracias!
